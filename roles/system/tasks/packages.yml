@@ -38,7 +38,48 @@
       - wget
       - vim
       - vlc
-    # TODO steam
-    # TODO VS Code
-    # TODO Wireguird
-    # TODO Minecraft
+    # TODO WoeUSB
+
+- name: Download and install .deb's not available in APT
+  vars:
+    debs:
+      vscode:
+        url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+        filename: "/tmp/vscode.deb"
+      steam:
+        url: "https://cdn.cloudflare.steamstatic.com/client/installer/steam.deb"
+        filename: "/tmp/steam.deb"
+      wireguird:
+        url: "https://github.com/UnnoTed/wireguird/releases/download/v1.1.0/wireguird_amd64.deb"
+        filename: "/tmp/wireguird.deb"
+      minecraft:
+        url: "https://launcher.mojang.com/download/Minecraft.deb"
+        filename: "/tmp/minecraft.deb"
+  block:
+    - name: Download .deb files
+      ansible.builtin.get_url:
+        url: "{{ item.value.url }}"
+        dest: "{{ item.value.filename }}"
+        mode: 0755
+      loop: "{{ debs | dict2items }}"
+    - name: Install .deb's
+      ansible.builtin.apt:
+        deb: "{{ item.value.filename }}"
+      loop: "{{ debs | dict2items }}"
+
+- name: Install WoeUSB
+  block:
+    - name: Install dependencies
+      ansible.builtin.apt:
+        name:
+          - p7zip-full
+          - python3-wxgtk4.0
+          - grub2-common
+          - grub-pc-bin
+          - parted
+          - dosfstools
+          - ntfs-3g
+    - name: Install WoeUSB Python package
+      ansible.builtin.pip:
+        name:
+          - WoeUSB-ng
