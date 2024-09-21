@@ -7,6 +7,7 @@
     shell: /bin/fish
     update_password: on_create
   # TODO add to sudoers?
+  # passwordless sudo
 
 - name: Suppress login message (hushlogin) for user
   ansible.builtin.file:

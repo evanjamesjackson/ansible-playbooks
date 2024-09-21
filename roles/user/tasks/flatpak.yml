@@ -16,7 +16,5 @@
     - tv.plex.PlexDesktop
     - com.spotify.Client
     - com.github.tchx84.Flatseal
+    - org.DolphinEmu.dolphin-emu
     # TODO PCSX2
-    # TODO Dolphin
-    # TODO GZDOOM
-    # TODO Retroarch

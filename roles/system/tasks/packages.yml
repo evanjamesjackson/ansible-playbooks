@@ -3,7 +3,13 @@
     update_cache: yes
     upgrade: yes
 
-- name: Install essential packages
+- name: Add custom APT repositories
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+  loop:
+    - "ppa:libretro/stable"
+
+- name: Install packages
   ansible.builtin.package:
     state: latest # noqa package-latest
     name:
@@ -24,6 +30,7 @@
       - nextcloud-desktop
       - pavucontrol
       - qbittorrent
+      - retroarch
       - solaar
       - software-properties-common
       - stow
@@ -34,3 +41,4 @@
     # TODO steam
     # TODO VS Code
     # TODO Wireguird
+    # TODO Minecraft
