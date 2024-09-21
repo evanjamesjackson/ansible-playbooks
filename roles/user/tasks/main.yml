@@ -1,4 +1,4 @@
-- name: Ensure the main user is created
+- name: Configure main user
   become: true
   ansible.builtin.user:
     name: "{{ username }}"
@@ -30,5 +30,7 @@
 
 - name: Install dotfiles
   ansible.builtin.include_tasks: dotfiles.yml
+
+- name: Install fonts
+  ansible.builtin.include_tasks: fonts.yml
 # TODO GNOME preferences
-# TODO fonts
