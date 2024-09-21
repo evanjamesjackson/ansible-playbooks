@@ -1,0 +1,5 @@
+username: ejackson
+home_directory: "/home/ejackson"
+github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
+ssh_key_file: "/home/ejackson/.ssh/id_ed25519"
+timezone: "America/Toronto"

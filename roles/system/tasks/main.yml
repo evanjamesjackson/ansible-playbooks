@@ -1,0 +1,6 @@
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: EvanAsus
+
+- name: Run package-related tasks
+  ansible.builtin.include_tasks: packages.yml

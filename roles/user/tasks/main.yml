@@ -1,0 +1,33 @@
+- name: Ensure the main user is created
+  become: true
+  ansible.builtin.user:
+    name: "{{ username }}"
+    password: "{{ password | password_hash('sha512') }}"
+    append: true
+    shell: /bin/fish
+    update_password: on_create
+  # TODO add to sudoers?
+
+- name: Suppress login message (hushlogin) for user
+  ansible.builtin.file:
+    path: "{{ home_directory }}/.hushlogin"
+    mode: 0644
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    modification_time: preserve
+    access_time: preserve
+    state: touch
+
+- name: Configure SSH key and connection to JacksonBox
+  ansible.builtin.include_tasks: ssh.yml
+
+- name: Configure GitHub SSH key
+  ansible.builtin.include_tasks: github.yml
+
+- name: Configure Fish shell
+  ansible.builtin.include_tasks: fish.yml
+
+- name: Install dotfiles
+  ansible.builtin.include_tasks: dotfiles.yml
+# TODO GNOME preferences
+# TODO fonts

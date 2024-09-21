@@ -1,0 +1,21 @@
+- name: Download oh-my-fish install script
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install"
+    dest: "/tmp/omf-install"
+    mode: 0755
+
+- name: Run oh-my-fish install script
+  ansible.builtin.shell:
+    cmd: "fish /tmp/omf-install --noninteractive --yes --path={{ home_directory }}/.local/share/omf --config={{ home_directory }}/.config/omf"
+    executable: /bin/bash
+  register: result
+  changed_when: result != 0
+
+- name: Set preferred oh-my-fish theme
+  ansible.builtin.shell:
+    cmd: |
+      omf install agnoster
+      omf theme agnoster
+    executable: /usr/bin/fish
+  register: result
+  changed_when: result != 0

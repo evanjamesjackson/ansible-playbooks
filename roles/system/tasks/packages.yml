@@ -1,0 +1,36 @@
+- name: Update packages
+  ansible.builtin.apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install essential packages
+  ansible.builtin.package:
+    state: latest # noqa package-latest
+    name:
+      - audacity
+      - ca-certificates
+      - calibre
+      - curl
+      - dbus-x11
+      - eog-plugins
+      - fish
+      - flatpak
+      - gnome-shell-extension-manager
+      - gnupg
+      - gnome-shell-extensions
+      - gnome-tweaks
+      - libreoffice
+      - make
+      - nextcloud-desktop
+      - pavucontrol
+      - qbittorrent
+      - solaar
+      - software-properties-common
+      - stow
+      - tmux
+      - wget
+      - vim
+      - vlc
+    # TODO steam
+    # TODO VS Code
+    # TODO Wireguird

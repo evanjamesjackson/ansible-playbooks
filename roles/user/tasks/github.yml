@@ -1,0 +1,24 @@
+- name: Generate SSH key for use with GitHub
+  community.crypto.openssh_keypair:
+    path: "{{ github_key_file }}"
+    type: ed25519
+
+- name: Read SSH public key to authorize
+  ansible.builtin.command:
+    cmd: "cat {{ github_key_file }}.pub"
+  register: ssh_pub_key
+  changed_when: false
+
+- name: Add public key to GitHub account
+  community.general.github_key:
+    token: "{{ github_token }}"
+    name: "{{ inventory_hostname }}"
+    pubkey: "{{ ssh_pub_key.stdout }}"
+
+- name: Add GitHub SSH key reference to config file
+  community.general.ssh_config:
+    user: "{{ username }}"
+    host: "github.com"
+    identity_file: "{{ github_key_file }}"
+    add_keys_to_agent: true
+    state: present

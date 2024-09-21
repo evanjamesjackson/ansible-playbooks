@@ -1,0 +1,22 @@
+- name: Add the Flathub Flatpak repository remote to the user installation
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+
+- name: Install Flatpaks
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: present
+    method: user
+  loop:
+    - librewolf
+    - com.brave.Browser
+    - tv.plex.PlexDesktop
+    - com.spotify.Client
+    - com.github.tchx84.Flatseal
+    # TODO PCSX2
+    # TODO Dolphin
+    # TODO GZDOOM
+    # TODO Retroarch

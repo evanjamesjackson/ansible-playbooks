@@ -1,0 +1,27 @@
+- name: Generate main SSH key
+  community.crypto.openssh_keypair:
+    path: "{{ ssh_key_file }}"
+    type: ed25519
+
+- name: Install paramiko package with pip (required by community.general.ssh_config)
+  become: true
+  ansible.builtin.pip:
+    name: paramiko
+
+- name: Ensure SSH config file exists
+  ansible.builtin.copy:
+    dest: "{{ home_directory }}/.ssh/config"
+    force: false
+    content: ""
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+
+- name: Add JacksonBox reference to config file
+  community.general.ssh_config:
+    user: "{{ username }}"
+    host: "JacksonBox"
+    hostname: "jacksonbox.local"
+    identity_file: "{{ ssh_key_file }}"
+    add_keys_to_agent: true
+    state: present

@@ -1,0 +1,10 @@
+- name: Run system plays
+  hosts: localhost
+  become: yes
+  roles:
+    - role: system
+
+- name: Run user-level plays
+  hosts: localhost
+  roles:
+    - role: user
