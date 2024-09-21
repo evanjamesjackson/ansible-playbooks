@@ -38,7 +38,6 @@
       - wget
       - vim
       - vlc
-    # TODO WoeUSB
 
 - name: Download and install .deb's not available in APT
   vars:
