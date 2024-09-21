@@ -17,4 +17,4 @@
     - com.spotify.Client
     - com.github.tchx84.Flatseal
     - org.DolphinEmu.dolphin-emu
-    # TODO PCSX2
+    - net.pcsx2.PCSX2
