@@ -11,7 +11,7 @@
 
 - name: Install packages
   ansible.builtin.package:
-    state: latest # noqa package-latest
+    state: present
     name:
       - audacity
       - ca-certificates
@@ -19,11 +19,7 @@
       - curl
       - dbus-x11
       - eog-plugins
-      - fish
-      - flatpak
-      - gnome-shell-extension-manager
       - gnupg
-      - gnome-shell-extensions
       - gnome-tweaks
       - libreoffice
       - make
@@ -33,7 +29,6 @@
       - retroarch
       - solaar
       - software-properties-common
-      - stow
       - tmux
       - wget
       - vim

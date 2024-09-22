@@ -1,3 +1,9 @@
+- name: Install flatpak
+  become: yes
+  ansible.builtin.package:
+    name:
+      - flatpak
+
 - name: Add the Flathub Flatpak repository remote to the user installation
   community.general.flatpak_remote:
     name: flathub

@@ -1,3 +1,9 @@
+- name: Install fish
+  become: yes
+  ansible.builtin.package:
+    name:
+      - fish
+
 - name: Download oh-my-fish install script
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install"

@@ -1,3 +1,9 @@
+- name: Install GNU stow
+  become: yes
+  ansible.builtin.package:
+    name:
+      - stow
+
 - name: Clone dotfiles repository
   ansible.builtin.git:
     repo: git@github.com:evanjamesjackson/dotfiles.git
