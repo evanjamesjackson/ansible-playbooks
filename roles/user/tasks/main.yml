@@ -18,6 +18,12 @@
     access_time: preserve
     state: touch
 
+- name: Ensure autostart directory exists
+  ansible.builtin.file:
+    path: "{{ home_directory }}/.config/autostart"
+    state: directory
+    mode: 0755
+
 - name: Configure SSH key and connection to JacksonBox
   ansible.builtin.include_tasks: ssh.yml
 
@@ -35,3 +41,6 @@
 
 - name: Configure GNOME
   ansible.builtin.include_tasks: gnome.yml
+
+- name: Configure rogauracore
+  ansible.builtin.include_tasks: rogauracore.yml
