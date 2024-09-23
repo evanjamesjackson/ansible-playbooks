@@ -32,4 +32,6 @@
 
 - name: Install fonts
   ansible.builtin.include_tasks: fonts.yml
-# TODO GNOME preferences
+
+- name: Configure GNOME
+  ansible.builtin.include_tasks: gnome.yml
