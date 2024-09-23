@@ -12,7 +12,7 @@
 - name: Add public key to GitHub account
   community.general.github_key:
     token: "{{ github_token }}"
-    name: "{{ inventory_hostname }}"
+    name: "{{ hostname }}"
     pubkey: "{{ ssh_pub_key.stdout }}"
 
 - name: Add GitHub SSH key reference to config file
