@@ -63,7 +63,7 @@
 
 - name: Install WoeUSB
   block:
-    - name: Install dependencies
+    - name: Install WoeUSB dependencies
       ansible.builtin.apt:
         name:
           - p7zip-full
