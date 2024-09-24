@@ -24,3 +24,10 @@
     - com.github.tchx84.Flatseal
     - org.DolphinEmu.dolphin-emu
     - net.pcsx2.PCSX2
+
+- name: Update Flatpaks
+  ansible.builtin.shell:
+    cmd: flatpak --user update --noninteractive
+    executable: /bin/bash
+  register: result
+  changed_when: result != 0
