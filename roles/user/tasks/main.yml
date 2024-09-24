@@ -44,3 +44,6 @@
 
 - name: Configure rogauracore
   ansible.builtin.include_tasks: rogauracore.yml
+
+- name: Configure Flatpaks
+  ansible.builtin.include_tasks: flatpak.yml
