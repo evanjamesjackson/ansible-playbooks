@@ -1,0 +1,27 @@
+# TODO Docker containers
+- name: Open Plex port
+  become: yes
+  community.general.ufw:
+    port: "32400"
+    proto: tcp
+    rule: allow
+
+- name: Open Prowlarr port
+  become: yes
+  community.general.ufw:
+    port: "9696"
+    proto: tcp
+    rule: allow
+    direction: in
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"
+
+- name: Open qBitTorrent port
+  become: yes
+  community.general.ufw:
+    port: "9091"
+    proto: tcp
+    rule: allow
+    direction: in
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"

@@ -1,0 +1,36 @@
+- name: Pull and run Netdata container
+  community.docker.docker_container:
+    name: netdata
+    pull: always
+    state: started
+    image: netdata/netdata:latest
+    restart_policy: unless-stopped
+    ports:
+      - "19999:19999/tcp"
+    capabilities:
+      - SYS_PTRACE
+    security_opts:
+      - apparmor:unconfined
+    env:
+      NETDATA_DISABLE_CLOUD: "1"
+      TZ: "{{ timezone }}"
+    volumes:
+      - netdataconfig:/etc/netdata
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+- name: Open Netdata port in UFW
+  become: true
+  community.general.ufw:
+    port: "19999"
+    proto: tcp
+    rule: allow
+    direction: in
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"

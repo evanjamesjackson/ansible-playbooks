@@ -1,17 +1,33 @@
 ## Installation
 
 1. Clone the repository and navigate to the directory
-2. Inspect `vars.yml` to ensure it matches your current setup
-3. Run `./install.sh` to install Ansible
-4. Run `ansible-vault decrypt group_vars/all/secret.yml`, then edit `secret.yml` and add:
+2. Inspect `hosts.yml` and the `vars.yml` files to ensure they match your current setup
+3. Run `./install.sh` to install Ansible and its requirements
+4. Create `secret.yml` files under the `group_vars` subdirectories:
 
-```
-password: YOUR-NON-ROOT-USERS-PASSWORD-HERE
-github_token: GITHUB_PERSONAL_ACCESS_TOKEN_FOR_ADDING_SSH_KEY_HERE
-```
+   1. In `group_vars/all/secret.yml` add the following:
 
-Save and close the file and then run `ansible-vault encrypt group_vars/all/secret.yml` to encrypt the file.
+      ```
+      github_token: GITHUB_PERSONAL_ACCESS_TOKEN_FOR_ADDING_SSH_KEY_HERE
+      ```
+
+   2. In `group_vars/server/secret.yml` add the following:
+
+      ```
+      password: YOUR-USERS-PASSWORD-HERE
+      dynamic_dns_password: DYNAMIC-DNS-SERVICE-PASSWORD-HERE
+      nextcloud_db_password: NEXTCLOUD-DB-PASSWORD-HERE
+      nextcloud_admin_password: NEXTCLOUD-ADMIN-PASSWORD-HERE
+      ```
+
+   3. In `group_vars/personal/secret.yml` add the following:
+
+      ```
+      password: YOUR-USERS-PASSWORD-HERE
+      ```
+
+      Finally, run `ansible-vault encrypt **/secret.yml` and provide a password to encrypt the files. Note that all `secret.yml` files are ignored by `.gitignore`.
 
 ## Running
 
-Run `./run.sh` to run the Ansible playbooks.
+Run `./run.sh` to run the Ansible playbook.

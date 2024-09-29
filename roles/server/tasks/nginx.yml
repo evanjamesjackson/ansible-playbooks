@@ -1,0 +1,70 @@
+- name: Stop default NGINX service (since we use a Docker container instead)
+  become: true
+  ansible.builtin.service:
+    name: nginx
+    state: stopped
+
+- name: Create nginx Docker network
+  community.docker.docker_network:
+    name: nginx_network
+    state: present
+    internal: false
+
+- name: Create custom nginx conf file
+  become: true
+  ansible.builtin.copy:
+    mode: 0644
+    dest: /etc/nginx/conf.d/custom.conf
+    content: |
+      client_max_body_size 50G;
+
+- name: Pull and run nginx-proxy container
+  community.docker.docker_container:
+    name: nginx-proxy
+    pull: always
+    state: started
+    image: nginxproxy/nginx-proxy:1.6
+    restart_policy: "always"
+    networks:
+      - name: "{{ nginx_network }}"
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+      - /etc/nginx/conf.d/custom.conf:/etc/nginx/conf.d/custom.conf:ro
+
+- name: Pull and run nginx-proxy-acme-companion container
+  community.docker.docker_container:
+    name: nginx-proxy-acme-companion
+    pull: always
+    state: started
+    image: nginxproxy/acme-companion:2.4
+    restart_policy: "always"
+    networks:
+      - name: "{{ nginx_network }}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+      - nginx-acme:/etc/acme.sh
+    env:
+      NGINX_PROXY_CONTAINER: nginx-proxy
+
+- name: Open port 80 for HTTP traffic in UFW
+  become: true
+  community.general.ufw:
+    port: http
+    proto: tcp
+    rule: allow
+
+- name: Open port 443 for HTTPS traffic in UFW
+  become: true
+  community.general.ufw:
+    port: https
+    proto: tcp
+    rule: allow

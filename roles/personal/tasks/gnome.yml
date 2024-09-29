@@ -1,0 +1,7 @@
+- name: Install GNOME packages
+  become: yes
+  ansible.builtin.package:
+    name:
+      - gnome-shell
+      - gnome-shell-extensions
+      - gnome-shell-extension-manager

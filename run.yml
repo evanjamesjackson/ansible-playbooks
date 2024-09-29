@@ -1,10 +1,46 @@
-- name: Run system plays
-  hosts: localhost
-  become: yes
+- name: Run generic roles for all hosts
+  hosts: all
+  become: true
   roles:
     - role: system
-
-- name: Run user-level plays
-  hosts: localhost
-  roles:
     - role: user
+
+- name: Configure generic UFW settings
+  hosts: ufw
+  become: true
+  roles:
+    - role: ufw
+
+- name: Run Docker setup roles
+  hosts: docker
+  become: true
+  roles:
+    - role: geerlingguy.pip
+    - role: docker_apt_key
+    - role: geerlingguy.docker
+
+- name: Configure generic GitHub access settings
+  hosts: github
+  roles:
+    - role: github
+
+- name: Configure dotfiles
+  hosts: dotfiles
+  roles:
+    - role: dotfiles
+
+- name: Configure fish shell
+  hosts: fish
+  roles:
+    - role: fish
+
+- name: Run personal machine-specific roles
+  hosts: personal
+  roles:
+    - role: personal
+
+- name: Run server-specific roles
+  hosts: server
+  roles:
+    - role: server
+# TODO pi-specific roles

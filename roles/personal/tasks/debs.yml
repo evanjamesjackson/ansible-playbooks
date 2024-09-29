@@ -1,40 +1,5 @@
-- name: Update packages
-  ansible.builtin.apt:
-    update_cache: yes
-    upgrade: yes
-
-- name: Add custom APT repositories
-  ansible.builtin.apt_repository:
-    repo: "{{ item }}"
-  loop:
-    - "ppa:libretro/stable"
-
-- name: Install packages
-  ansible.builtin.package:
-    state: present
-    name:
-      - audacity
-      - ca-certificates
-      - calibre
-      - curl
-      - dbus-x11
-      - eog-plugins
-      - gnupg
-      - gnome-tweaks
-      - libreoffice
-      - make
-      - nextcloud-desktop
-      - pavucontrol
-      - qbittorrent
-      - retroarch
-      - solaar
-      - software-properties-common
-      - tmux
-      - wget
-      - vim
-      - vlc
-
 - name: Download and install .deb's not available in APT
+  become: true
   vars:
     debs:
       vscode:
@@ -64,6 +29,7 @@
 - name: Install WoeUSB
   block:
     - name: Install WoeUSB dependencies
+      become: true
       ansible.builtin.apt:
         name:
           - p7zip-full
@@ -74,6 +40,7 @@
           - dosfstools
           - ntfs-3g
     - name: Install WoeUSB Python package
+      become: true
       ansible.builtin.pip:
         name:
           - WoeUSB-ng

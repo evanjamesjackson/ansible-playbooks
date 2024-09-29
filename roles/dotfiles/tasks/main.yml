@@ -9,7 +9,7 @@
     repo: git@github.com:evanjamesjackson/dotfiles.git
     key_file: "{{ github_key_file }}"
     dest: "{{ home_directory }}/dotfiles"
-    version: personal
+    version: "{{ dotfiles_branch }}"
 
 - name: Symlink dotfiles using GNU stow
   ansible.builtin.shell:

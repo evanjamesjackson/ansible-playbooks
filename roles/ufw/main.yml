@@ -1,0 +1,36 @@
+- name: Install UFW
+  ansible.builtin.package:
+    name:
+      - ufw
+
+- name: Apply generic UFW rules
+  block:
+    - name: Reset UFW
+      community.general.ufw:
+        state: reset
+
+    - name: Allow all outgoing traffic
+      community.general.ufw:
+        default: allow
+        direction: outgoing
+
+    # Deny all incoming traffic - services can define ports that they need opened
+    - name: Deny all incoming traffic
+      community.general.ufw:
+        default: deny
+        direction: incoming
+
+  always:
+    # Always ensure SSH port is opened so we don't lock ourselves out
+    - name: Open SSH port
+      community.general.ufw:
+        rule: allow
+        direction: in
+        port: "22"
+        proto: tcp
+        src: "{{ item }}"
+      loop: "{{ local_subnets }}"
+
+    - name: Enable UFW
+      community.general.ufw:
+        state: enabled

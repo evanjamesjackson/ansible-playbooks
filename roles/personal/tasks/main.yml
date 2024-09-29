@@ -1,0 +1,37 @@
+- name: Ignore laptop lid close
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    regexp: "^HandleLidSwitch="
+    insertafter: "^#HandleLidSwitch="
+    line: "HandleLidSwitch=ignore"
+
+- name: Ensure autostart directory exists
+  ansible.builtin.file:
+    path: "{{ home_directory }}/.config/autostart"
+    state: directory
+    mode: 0755
+
+- name: Configure personal SSH client settings
+  ansible.builtin.include_tasks: ssh_client.yml
+
+- name: Install .debs
+  ansible.builtin.include_tasks: debs.yml
+
+- name: Configure Flatpak
+  ansible.builtin.include_tasks: flatpak.yml
+
+- name: Configure fonts
+  ansible.builtin.include_tasks: fonts.yml
+
+- name: Configure GNOME
+  ansible.builtin.include_tasks: gnome.yml
+
+- name: Configure dconf settings
+  ansible.builtin.include_tasks: dconf.yml
+
+- name: Configure GNOME temrinal
+  ansible.builtin.include_tasks: terminal.yml
+
+- name: Configure rogauracore
+  ansible.builtin.include_tasks: rogauracore.yml

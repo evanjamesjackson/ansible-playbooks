@@ -1,0 +1,28 @@
+- name: Configure SSH server settings
+  ansible.builtin.include_tasks: ssh_server.yml
+
+- name: Configure users for running services
+  ansible.builtin.include_tasks: services_users.yml
+
+- name: Configure NGINX reverse proxy
+  ansible.builtin.include_tasks: nginx.yml
+
+- name: Configure ddclient
+  ansible.builtin.include_tasks: ddclient.yml
+
+- name: Configure Wireguard VPN server
+  ansible.builtin.include_tasks: wireguard.yml
+
+- name: Configure Netdata
+  ansible.builtin.include_tasks: netdata.yml
+
+- name: Configure Folding@home
+  ansible.builtin.include_tasks: folding@home.yml
+
+- name: Configure Nextcloud
+  ansible.builtin.include_tasks: nextcloud.yml
+
+- name: Configure home theater services
+  ansible.builtin.include_tasks: home_theater.yml
+# TODO minecraft
+# TODO lastipy

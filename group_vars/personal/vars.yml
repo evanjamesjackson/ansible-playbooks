@@ -1,0 +1,38 @@
+# System vars
+hostname: EvanAsus
+timezone: "America/Toronto"
+trigger_reboots: false
+
+# APT vars
+custom_apt_repositories:
+  - "ppa:libretro/stable"
+apt_packages:
+  - audacity
+  - ca-certificates
+  - calibre
+  - curl
+  - dbus-x11
+  - eog-plugins
+  - gnupg
+  - gnome-tweaks
+  - libreoffice
+  - make
+  - nextcloud-desktop
+  - pavucontrol
+  - qbittorrent
+  - retroarch
+  - rpi-imager
+  - solaar
+  - software-properties-common
+  - tmux
+  - wget
+  - vim
+  - vlc
+
+# User-level vars
+username: ejackson
+home_directory: "/home/ejackson"
+user_shell: /bin/fish
+ssh_key_file: "/home/ejackson/.ssh/id_ed25519"
+github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
+dotfiles_branch: personal

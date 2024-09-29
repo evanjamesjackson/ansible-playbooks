@@ -1,0 +1,70 @@
+# System vars
+hostname: JacksonBox
+timezone: "America/Toronto"
+trigger_reboots: true
+
+# APT vars
+apt_packages:
+  - speedtest-cli
+  - tmux
+
+# Docker-related vars
+docker_apt_gpg_key: "https://download.docker.com/linux/ubuntu/gpg"
+docker_apt_repository: "deb https://download.docker.com/linux/ubuntu jammy stable"
+
+# User-level vars
+username: ejackson
+home_directory: "/home/ejackson"
+github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
+user_shell: /bin/fish
+dotfiles_branch: server
+
+# No-login users for owning services
+services_users:
+  ddclient:
+    name: "ddclient"
+    uid: 995
+    groups: "ddclient"
+    gid: 995
+  folding:
+    name: "folding"
+    uid: 1001
+    groups: "folding"
+    gid: 1001
+  media:
+    name: "media"
+    uid: 911
+    groups: "media"
+    gid: 911
+  minecraft:
+    name: "minecraft"
+    uid: 996
+    groups: "minecraft"
+    gid: 996
+  netdata:
+    name: "netdata"
+    uid: 1004
+    groups: "netdata"
+    gid: 1004
+  wireguard:
+    name: "wireguard"
+    uid: 1003
+    groups: "wireguard"
+    gid: 1003
+  www-data:
+    name: "www-data"
+    uid: 33
+    groups: "www-data"
+    gid: 33
+
+# NGINX Docker network shared by services that should be forwarded to the reverse proxy
+nginx_network: "nginx_network"
+
+# Services domains
+domain_name: "jacksonnet.ca"
+ddclient_domains: "geysermc,minecraft,sonarr,radarr,nextcloud,vpn"
+nextcloud_domain_name: "nextcloud.jacksonnet.ca"
+vpn_domain_name: "vpn.jacksonnet.ca"
+
+# Location of Nextcloud data
+nextcloud_data_dir: "/hdd/nextcloud/app/data"

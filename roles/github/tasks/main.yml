@@ -15,6 +15,11 @@
     name: "{{ hostname }}"
     pubkey: "{{ ssh_pub_key.stdout }}"
 
+- name: Install paramiko package with pip (required by community.general.ssh_config)
+  become: true
+  ansible.builtin.pip:
+    name: paramiko
+
 - name: Add GitHub SSH key reference to config file
   community.general.ssh_config:
     user: "{{ username }}"

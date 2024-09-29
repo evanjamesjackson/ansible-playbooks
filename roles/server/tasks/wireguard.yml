@@ -1,0 +1,37 @@
+- name: Pull and run Wireguard (WG-Easy) container
+  community.docker.docker_container:
+    name: wireguard
+    pull: always
+    state: started
+    image: ghcr.io/wg-easy/wg-easy
+    restart_policy: "always"
+    sysctls:
+      net.ipv4.conf.all.src_valid_mark: 1
+      net.ipv4.ip_forward: 1
+    capabilities:
+      - NET_ADMIN
+      - SYS_MODULE
+    ports:
+      - "51820:51820/udp"
+      - "51821:51821/tcp"
+    env:
+      WG_HOST: "{{ vpn_domain_name }}"
+    volumes:
+      - wireguard-data:/etc/wireguard
+
+- name: Open Wireguard (UDP) port in UFW
+  become: true
+  community.general.ufw:
+    port: "51820"
+    proto: udp
+    rule: allow
+
+- name: Open Wireguard GUI port in UFW
+  become: true
+  community.general.ufw:
+    port: "51821"
+    proto: tcp
+    rule: allow
+    direction: in
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"

@@ -1,0 +1,17 @@
+# System vars
+hostname: JacksonBox
+timezone: "America/Toronto"
+trigger_reboots: true
+
+apt_packages:
+  - speedtest-cli
+  - vim
+
+# Docker-related vars
+docker_apt_gpg_key: "https://download.docker.com/linux/debian/gpg"
+docker_apt_repository: "deb https://download.docker.com/linux/debian"
+
+# User-level vars
+username: ejackson
+home_directory: "/home/ejackson"
+user_shell: /bin/bash

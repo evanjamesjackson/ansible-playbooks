@@ -1,0 +1,7 @@
+- name: Add user to Docker group
+  become: true
+  ansible.builtin.user:
+    name: "{{ username }}"
+    groups: docker
+    append: true
+  register: add_to_docker_group_result

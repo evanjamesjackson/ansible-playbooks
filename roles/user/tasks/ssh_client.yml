@@ -1,0 +1,13 @@
+- name: Install paramiko package with pip (required by community.general.ssh_config)
+  become: true
+  ansible.builtin.pip:
+    name: paramiko
+
+- name: Ensure SSH config file exists
+  ansible.builtin.copy:
+    dest: "{{ home_directory }}/.ssh/config"
+    force: false
+    content: ""
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
