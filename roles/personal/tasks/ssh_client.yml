@@ -3,7 +3,7 @@
     path: "{{ ssh_key_file }}"
     type: ed25519
 
-- name: Add server reference to config file
+- name: Add JacksonBox reference to config file
   community.general.ssh_config:
     user: "{{ username }}"
     host: "{{ hostvars['JacksonBox']['hostname'] }}"
@@ -12,7 +12,7 @@
     add_keys_to_agent: true
     state: present
 
-- name: Add Raspberry Pi reference to config file
+- name: Add RaspberryPi reference to config file
   community.general.ssh_config:
     user: "{{ username }}"
     host: "{{ hostvars['RaspberryPi']['hostname'] }}"

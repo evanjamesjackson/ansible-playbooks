@@ -12,10 +12,10 @@
     state: directory
     mode: 0755
 
-- name: Configure personal SSH client settings
+- name: Configure SSH client settings
   ansible.builtin.include_tasks: ssh_client.yml
 
-- name: Install .debs
+- name: Install .debs not available in APT
   ansible.builtin.include_tasks: debs.yml
 
 - name: Configure Flatpak

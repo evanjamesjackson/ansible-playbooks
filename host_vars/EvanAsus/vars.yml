@@ -24,6 +24,7 @@ apt_packages:
   - rpi-imager
   - solaar
   - software-properties-common
+  - speedtest-cli
   - tmux
   - wget
   - vim
