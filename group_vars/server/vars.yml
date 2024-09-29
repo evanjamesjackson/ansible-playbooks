@@ -1,5 +1,6 @@
 # System vars
 hostname: JacksonBox
+domain: jacksonbox.local
 timezone: "America/Toronto"
 trigger_reboots: true
 

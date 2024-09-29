@@ -1,5 +1,6 @@
 # System vars
-hostname: JacksonBox
+hostname: RaspberryPi
+domain: raspberrypi.local
 timezone: "America/Toronto"
 trigger_reboots: true
 

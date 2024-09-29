@@ -3,11 +3,11 @@
     path: "{{ ssh_key_file }}"
     type: ed25519
 
-- name: Add JacksonBox reference to config file
+- name: Add server reference to config file
   community.general.ssh_config:
     user: "{{ username }}"
-    host: "JacksonBox"
-    hostname: "jacksonbox.local"
+    host: "{{ hostvars['JacksonBox']['hostname'] }}"
+    hostname: "{{ hostvars['JacksonBox']['domain'] }}"
     identity_file: "{{ ssh_key_file }}"
     add_keys_to_agent: true
     state: present
@@ -15,8 +15,8 @@
 - name: Add Raspberry Pi reference to config file
   community.general.ssh_config:
     user: "{{ username }}"
-    host: "RaspberryPi"
-    hostname: "raspberrypi.local"
+    host: "{{ hostvars['RaspberryPi']['hostname'] }}"
+    hostname: "{{ hostvars['RaspberryPi']['domain'] }}"
     identity_file: "{{ ssh_key_file }}"
     add_keys_to_agent: true
     state: present
