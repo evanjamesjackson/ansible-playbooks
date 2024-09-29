@@ -17,7 +17,7 @@ docker_apt_repository: "deb https://download.docker.com/linux/ubuntu jammy stabl
 username: ejackson
 home_directory: "/home/ejackson"
 github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
-user_shell: /bin/fish
+user_shell: /usr/bin/fish
 dotfiles_branch: server
 
 # No-login users for owning services
