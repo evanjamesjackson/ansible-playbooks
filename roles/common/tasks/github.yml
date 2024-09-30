@@ -22,3 +22,4 @@
     identity_file: "{{ github_key_file }}"
     add_keys_to_agent: true
     state: present
+# TODO known_hosts reference

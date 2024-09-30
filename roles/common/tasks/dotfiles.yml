@@ -1,15 +1,14 @@
-- name: Install GNU stow
-  become: yes
-  ansible.builtin.package:
-    name:
-      - stow
-
 - name: Clone dotfiles repository
+  # "become_user" seems to be necessary sometimes as this may get run as root (even though the task list is not being run as root...)
+  become: true
+  become_user: "{{ username }}"
   ansible.builtin.git:
     repo: git@github.com:evanjamesjackson/dotfiles.git
     key_file: "{{ github_key_file }}"
     dest: "{{ home_directory }}/dotfiles"
     version: "{{ dotfiles_branch }}"
+
+# TODO handle when files exist
 
 - name: Symlink dotfiles using GNU stow
   ansible.builtin.shell:

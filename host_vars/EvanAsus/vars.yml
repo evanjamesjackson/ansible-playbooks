@@ -22,9 +22,6 @@ apt_packages:
   - retroarch
   - rpi-imager
   - solaar
-  - software-properties-common
-  - speedtest-cli
-  - tmux
   - wget
   - vim
   - vlc

@@ -2,6 +2,7 @@
   ansible.builtin.apt_key:
     keyserver: keyserver.ubuntu.com
     id: 7EA0A9C3F273FCD8
+  when: ansible_distribution == "Ubuntu"
 
 - name: Run geerlingguy.pip role to install Docker pip package
   ansible.builtin.include_role:
@@ -12,7 +13,6 @@
     name: geerlingguy.docker
 
 - name: Add user to Docker group
-  become: true
   ansible.builtin.user:
     name: "{{ username }}"
     groups: docker
