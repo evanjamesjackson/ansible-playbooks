@@ -1,9 +1,11 @@
 - name: Install UFW
+  become: true
   ansible.builtin.package:
     name:
       - ufw
 
 - name: Apply generic UFW rules
+  become: true
   block:
     - name: Reset UFW
       community.general.ufw:
