@@ -1,2 +1,8 @@
 - name: Configure SSH server settings
   ansible.builtin.include_tasks: ssh_server.yml
+
+- name: Configure Docker
+  ansible.builtin.include_tasks: docker.yml
+
+- name: Configure UFW
+  ansible.builtin.include_tasks: ufw.yml
