@@ -11,9 +11,21 @@
   loop: "{{ custom_apt_repositories }}"
   when: custom_apt_repositories is defined and custom_apt_repositories != None
 
+- name: Set apt_packages to empty list if undefined
+  ansible.builtin.set_fact:
+    apt_packages: "{{ apt_packages | default([]) }}"
+
 - name: Install packages
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ apt_packages }}"
-  when: apt_packages is defined and apt_packages != None
+    name: "{{ combined_apt_packages }}"
+  vars:
+    default_apt_packages:
+      - fish
+      - software-properties-common
+      - speedtest-cli
+      - stow
+      - tmux
+      - vim
+    combined_apt_packages: "{{ default_apt_packages + apt_packages }}"
