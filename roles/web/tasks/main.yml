@@ -19,7 +19,7 @@
 - name: Configure Nextcloud service
   ansible.builtin.include_tasks: nextcloud.yml
 
-- name: Configure home theater services service
+- name: Configure home theater services
   ansible.builtin.include_tasks: home_theater.yml
 # TODO minecraft
 # TODO lastipy
