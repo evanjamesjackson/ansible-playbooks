@@ -1,12 +1,7 @@
 # System vars
 hostname: RaspberryPi
 domain: raspberrypi.local
-timezone: "America/Toronto"
 trigger_reboots: true
-
-apt_packages:
-  - speedtest-cli
-  - vim
 
 # Docker-related vars
 docker_apt_gpg_key: "https://download.docker.com/linux/debian/gpg"
@@ -15,4 +10,6 @@ docker_apt_repository: "deb https://download.docker.com/linux/debian"
 # User-level vars
 username: ejackson
 home_directory: "/home/ejackson"
-user_shell: /bin/bash
+github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
+user_shell: /usr/bin/fish
+dotfiles_branch: server

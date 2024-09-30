@@ -7,4 +7,4 @@ sudo apt install -y software-properties-common python3 python3-pip
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install -y ansible
 sudo pip3 install ansible-dev-tools
-ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r roles/requirements.yml

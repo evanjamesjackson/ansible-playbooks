@@ -1,3 +1,8 @@
 #!/bin/bash
 
-ansible-playbook --verbose --ask-vault-pass -K run.yml
+if [ -z $1 ]
+then
+    ansible-playbook --verbose --ask-vault-pass site.yml
+else
+    ansible-playbook --verbose --ask-vault-pass playbooks/$1.yml
+fi

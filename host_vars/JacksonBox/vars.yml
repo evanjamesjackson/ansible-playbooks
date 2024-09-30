@@ -21,7 +21,7 @@ user_shell: /usr/bin/fish
 dotfiles_branch: server
 
 # No-login users for owning services
-services_users:
+service_users:
   ddclient:
     name: "ddclient"
     uid: 995

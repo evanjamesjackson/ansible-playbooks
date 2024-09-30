@@ -26,10 +26,10 @@
       password: YOUR-USERS-PASSWORD-HERE
       ```
 
-      Finally, run `ansible-vault encrypt **/secret.yml` and provide a password to encrypt the files. Note that all `secret.yml` files are ignored by `.gitignore`.
-
    4. TODO RaspberryPi secrets
+
+      Finally, run `ansible-vault encrypt **/secret.yml` and provide a password to encrypt the files. Note that all `secret.yml` files are ignored by `.gitignore`.
 
 ## Running
 
-Run `./run.sh` to run the Ansible playbook.
+Run `./run.sh` to run all the playbooks. Optionally, pass the name of a playbook (without its extension) to just run that playbook (e.g. `./run.sh personal`).

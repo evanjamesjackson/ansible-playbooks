@@ -1,5 +1,1 @@
-# Allow all private subnets in UFW so access will work on any LAN (see https://en.wikipedia.org/wiki/Private_network#Private_IPv4_addresses)
-local_subnets:
-  - "192.168.0.0/16"
-  - "172.16.0.0/12"
-  - "10.0.0.0/8"
+timezone: "America/Toronto"

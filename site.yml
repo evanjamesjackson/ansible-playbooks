@@ -1,0 +1,10 @@
+- name: Run personal playbook
+  ansible.builtin.import_playbook: playbooks/personal.yml
+
+- name: Run servers playbook
+  ansible.builtin.import_playbook: playbooks/servers.yml
+
+- name: Run web servers playbook
+  ansible.builtin.import_playbook: playbooks/web.yml
+# - name: Run Pi-hole playbook
+#   ansible.builtin.import_playbook: pi_hole.yml

@@ -1,4 +1,0 @@
-- name: Add Docker apt public key
-  ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 7EA0A9C3F273FCD8

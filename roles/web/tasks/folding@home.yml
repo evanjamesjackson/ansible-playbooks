@@ -6,8 +6,8 @@
     image: lscr.io/linuxserver/foldingathome:latest
     restart_policy: unless-stopped
     env:
-      PUID: "{{ services_users.folding.uid }}"
-      PGID: "{{ services_users.folding.gid }}"
+      PUID: "{{ service_users.folding.uid }}"
+      PGID: "{{ service_users.folding.gid }}"
       TZ: "{{ timezone }}"
       MACHINE_NAME: "{{ hostname }}"
     ports:

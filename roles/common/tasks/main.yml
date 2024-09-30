@@ -1,0 +1,33 @@
+- name: Set hostname
+  become: true
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+
+- name: Run package-related tasks
+  ansible.builtin.include_tasks: apt.yml
+
+- name: Run user-related tasks
+  ansible.builtin.include_tasks: user.yml
+
+- name: Configure SSH client settings
+  ansible.builtin.include_tasks: ssh_client.yml
+
+- name: Configure GitHub access settings
+  ansible.builtin.include_tasks: github.yml
+
+- name: Configure dotfiles
+  ansible.builtin.include_tasks: dotfiles.yml
+
+- name: Configure fish shell
+  ansible.builtin.include_tasks: fish.yml
+
+# TODO unattended upgrades
+
+- name: Check if reboot required post-setup
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+  register: reboot_required_file
+
+- name: Reboot if required
+  ansible.builtin.reboot:
+  when: reboot_required_file.stat.exists and trigger_reboots is defined and trigger_reboots

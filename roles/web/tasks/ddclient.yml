@@ -2,8 +2,8 @@
   become: true
   ansible.builtin.file:
     mode: 0644
-    owner: "{{ services_users.ddclient.name }}"
-    group: "{{ services_users.ddclient.groups }}"
+    owner: "{{ service_users.ddclient.name }}"
+    group: "{{ service_users.ddclient.groups }}"
     path: /etc/ddclient
     state: directory
 
@@ -11,8 +11,8 @@
   become: true
   ansible.builtin.copy:
     mode: 0644
-    owner: "{{ services_users.ddclient.name }}"
-    group: "{{ services_users.ddclient.groups }}"
+    owner: "{{ service_users.ddclient.name }}"
+    group: "{{ service_users.ddclient.groups }}"
     dest: /etc/ddclient/ddclient.conf
     content: |
       ssl=yes
@@ -32,7 +32,7 @@
     image: lscr.io/linuxserver/ddclient:latest
     restart_policy: unless-stopped
     env:
-      PUID: "{{ services_users.ddclient.uid }}"
-      PGID: "{{ services_users.ddclient.gid }}"
+      PUID: "{{ service_users.ddclient.uid }}"
+      PGID: "{{ service_users.ddclient.gid }}"
     volumes:
       - /etc/ddclient/ddclient.conf:/config/ddclient.conf

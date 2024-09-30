@@ -30,7 +30,7 @@
 - name: Configure dconf settings
   ansible.builtin.include_tasks: dconf.yml
 
-- name: Configure GNOME temrinal
+- name: Configure GNOME terminal
   ansible.builtin.include_tasks: terminal.yml
 
 - name: Configure rogauracore

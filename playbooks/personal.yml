@@ -1,0 +1,5 @@
+- name: Configure server
+  hosts: personal
+  roles:
+    - role: common
+    - role: personal

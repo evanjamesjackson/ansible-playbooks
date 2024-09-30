@@ -1,9 +1,9 @@
-- name: Create groups for services users
+- name: Create groups for service users
   become: true
   ansible.builtin.group:
     name: "{{ item.value.groups }}"
     gid: "{{ item.value.gid }}"
-  loop: "{{ services_users | dict2items }}"
+  loop: "{{ service_users | dict2items }}"
 
 - name: Create no-login users for owning services
   become: true
@@ -14,4 +14,12 @@
     shell: /sbin/nologin
     create_home: no
     append: no
-  loop: "{{ services_users | dict2items }}"
+  loop: "{{ service_users | dict2items }}"
+
+- name: Add main user to service groups
+  become: true
+  ansible.builtin.user:
+    name: "{{ username }}"
+    append: true
+    group: "{{ item.value.groups }}"
+  loop: "{{ service_users | dict2items }}"
