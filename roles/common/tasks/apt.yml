@@ -16,4 +16,4 @@
   ansible.builtin.package:
     state: present
     name: "{{ apt_packages }}"
-  when: apt_packages is defined
+  when: apt_packages is defined and apt_packages != None
