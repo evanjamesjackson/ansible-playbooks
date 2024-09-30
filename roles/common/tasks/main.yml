@@ -6,6 +6,9 @@
 - name: Run package-related tasks
   ansible.builtin.include_tasks: apt.yml
 
+- name: Configure Python
+  ansible.builtin.include_tasks: python.yml
+
 - name: Run user-related tasks
   ansible.builtin.include_tasks: user.yml
 
