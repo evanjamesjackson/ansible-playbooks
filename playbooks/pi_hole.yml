@@ -5,3 +5,4 @@
     - role: common
     - role: server
       become: true # required here for geerlingguy.docker
+    - role: pi_hole

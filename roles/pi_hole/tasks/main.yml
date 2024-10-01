@@ -1,0 +1,91 @@
+- name: Pull Pi-hole Docker image
+  community.docker.docker_image_pull:
+    name: cbcrowe/pihole-unbound
+
+- name: Get local IP
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      hostname -I | awk '{print $1}'
+    executable: /bin/bash
+  register: local_ip
+  changed_when: local_ip.changed
+
+- name: Start Pi-hole Docker container
+  community.docker.docker_container:
+    name: pihole
+    image: cbcrowe/pihole-unbound
+    restart_policy: unless-stopped
+    hostname: "{{ hostname }}"
+    domainname: "{{ hostname }}.local"
+    network_mode: host
+    capabilities:
+      - NET_ADMIN
+    env:
+      FTLCONF_LOCAL_IPV4: "{{ local_ip.stdout }}"
+      TZ: "{{ timezone }}"
+      # Web admin
+      WEB_PORT: "81"
+      WEBPASSWORD: "pihole"
+      # DNS
+      PIHOLE_DNS_: "127.0.0.1#5335"
+      DNSSEC: "true"
+      DNSMASQ_LISTENING: "all"
+      # DHCP
+      DHCP_ACTIVE: "true"
+      DHCP_ROUTER: "{{ router_ip }}"
+      DHCP_START: "{{ dhcp_start }}"
+      DHCP_END: "{{ dhcp_end }}"
+    volumes:
+      - etc_pihole-unbound:/etc/pihole:rw
+      - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
+
+- name: Open Pi-hole web UI port in UFW
+  become: true
+  community.general.ufw:
+    rule: allow
+    direction: in
+    port: "81"
+    proto: tcp
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"
+
+- name: Open DNS port (TCP) in UFW
+  become: true
+  community.general.ufw:
+    rule: allow
+    direction: in
+    port: "53"
+    proto: tcp
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"
+
+- name: Open DNS port (UDP) in UFW
+  become: true
+  community.general.ufw:
+    rule: allow
+    direction: in
+    port: "53"
+    proto: udp
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"
+
+- name: Open DHCP port (TCP) in UFW
+  become: true
+  community.general.ufw:
+    rule: allow
+    direction: in
+    port: "67"
+    proto: tcp
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"
+
+- name: Open DHCP port (UDP) in UFW
+  become: true
+  community.general.ufw:
+    rule: allow
+    direction: in
+    port: "67"
+    proto: udp
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"
