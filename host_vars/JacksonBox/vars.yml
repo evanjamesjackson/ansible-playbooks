@@ -4,11 +4,6 @@ domain: jacksonbox.local
 timezone: "America/Toronto"
 trigger_reboots: true
 
-# APT vars
-apt_packages:
-  - speedtest-cli
-  - tmux
-
 # User-level vars
 username: ejackson
 home_directory: "/home/ejackson"

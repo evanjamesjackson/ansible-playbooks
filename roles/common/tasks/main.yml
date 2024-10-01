@@ -23,6 +23,7 @@
 
 - name: Configure fish shell
   ansible.builtin.include_tasks: fish.yml
+  when: "user_shell == '/usr/bin/fish'"
 
 # TODO unattended upgrades
 
