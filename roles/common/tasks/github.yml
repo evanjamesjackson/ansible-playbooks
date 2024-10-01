@@ -22,4 +22,11 @@
     identity_file: "{{ github_key_file }}"
     add_keys_to_agent: true
     state: present
-# TODO known_hosts reference
+
+- name: Ensure github.com is a known host
+  ansible.builtin.lineinfile:
+    dest: "{{ home_directory }}/.ssh/known_hosts"
+    regexp: "^github\\.com"
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    create: true
+    mode: 0644
