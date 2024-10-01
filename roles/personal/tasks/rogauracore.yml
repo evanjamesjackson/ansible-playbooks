@@ -19,7 +19,8 @@
       cd ..
       rm -rf rogauracore-$ROGAURACORE_VERSION.tar.gz rogauracore-$ROGAURACORE_VERSION
   register: result
-  changed_when: result != 0
+  changed_when: false
+  failed_when: result.rc != 0
 
 - name: Register rogauracore to autostart
   vars:

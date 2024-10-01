@@ -30,4 +30,5 @@
     cmd: flatpak --user update --noninteractive
     executable: /bin/bash
   register: result
-  changed_when: result != 0
+  changed_when: result.stdout != 'Nothing to do.'
+  failed_when: result.rc != 0

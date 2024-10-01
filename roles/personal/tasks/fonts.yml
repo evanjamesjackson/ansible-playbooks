@@ -19,5 +19,6 @@
           fc-cache -fv
         executable: /bin/bash
       register: result
-      changed_when: result != 0
+      changed_when: false
+      failed_when: result.rc != 0
       loop: "{{ fonts | dict2items }}"

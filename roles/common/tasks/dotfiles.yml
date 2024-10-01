@@ -8,11 +8,12 @@
     dest: "{{ home_directory }}/dotfiles"
     version: "{{ dotfiles_branch }}"
 
-# TODO handle when files exist
-
 - name: Symlink dotfiles using GNU stow
   ansible.builtin.shell:
     chdir: "{{ home_directory }}/dotfiles"
-    cmd: stow *
+    cmd: |
+      stow --adopt *
+      git restore .
   register: result
-  changed_when: result != 0
+  changed_when: result.stdout != ''
+  failed_when: result.rc != 0
