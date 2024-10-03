@@ -6,9 +6,6 @@
         url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
         filename: "/tmp/vscode.deb"
         checksum: "sha256:f2c1e7d061b0c267342293b6c363cd07f5efcea24a66ea968aca700e8d065fb4"
-      steam:
-        url: "https://cdn.cloudflare.steamstatic.com/client/installer/steam.deb"
-        filename: "/tmp/steam.deb"
       wireguird:
         url: "https://github.com/UnnoTed/wireguird/releases/download/v1.1.0/wireguird_amd64.deb"
         filename: "/tmp/wireguird.deb"

@@ -22,6 +22,7 @@ apt_packages:
   - retroarch
   - rpi-imager
   - solaar
+  - steam
   - wget
   - vim
   - vlc
