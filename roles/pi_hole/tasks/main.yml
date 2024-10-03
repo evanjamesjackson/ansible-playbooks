@@ -31,11 +31,6 @@
       PIHOLE_DNS_: "127.0.0.1#5335"
       DNSSEC: "true"
       DNSMASQ_LISTENING: "all"
-      # DHCP
-      DHCP_ACTIVE: "true"
-      DHCP_ROUTER: "{{ router_ip }}"
-      DHCP_START: "{{ dhcp_start }}"
-      DHCP_END: "{{ dhcp_end }}"
     volumes:
       - etc_pihole-unbound:/etc/pihole:rw
       - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
@@ -66,26 +61,6 @@
     rule: allow
     direction: in
     port: "53"
-    proto: udp
-    src: "{{ item }}"
-  loop: "{{ local_subnets }}"
-
-- name: Open DHCP port (TCP) in UFW
-  become: true
-  community.general.ufw:
-    rule: allow
-    direction: in
-    port: "67"
-    proto: tcp
-    src: "{{ item }}"
-  loop: "{{ local_subnets }}"
-
-- name: Open DHCP port (UDP) in UFW
-  become: true
-  community.general.ufw:
-    rule: allow
-    direction: in
-    port: "67"
     proto: udp
     src: "{{ item }}"
   loop: "{{ local_subnets }}"
