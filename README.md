@@ -20,13 +20,17 @@
       nextcloud_admin_password: NEXTCLOUD-ADMIN-PASSWORD-HERE
       ```
 
-   3. In `group_vars/EvanAsus/secret.yml` add the following:
+   3. In `host_vars/EvanAsus/secret.yml` add the following:
 
       ```
       password: YOUR-USERS-PASSWORD-HERE
       ```
 
-   4. TODO RaspberryPi secrets
+   4. In `host_vars/RaspberryPi/secret.yml` add the following:
+
+      ```
+      password: YOUR-USERS-PASSWORD-HERE
+      ```
 
       Finally, run `ansible-vault encrypt **/secret.yml` and provide a password to encrypt the files. Note that all `secret.yml` files are ignored by `.gitignore`.
 
