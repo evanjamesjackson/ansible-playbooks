@@ -34,5 +34,3 @@ user_shell: /usr/bin/fish
 ssh_key_file: "/home/ejackson/.ssh/id_ed25519"
 github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
 dotfiles_branch: personal
-
-protonvpn_version: "1.0.4"
