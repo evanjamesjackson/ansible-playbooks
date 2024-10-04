@@ -33,5 +33,11 @@
 - name: Configure GNOME terminal
   ansible.builtin.include_tasks: terminal.yml
 
+- name: Configure ProtonVPN
+  ansible.builtin.include_tasks: protonvpn.yml
+
 - name: Configure rogauracore
   ansible.builtin.include_tasks: rogauracore.yml
+
+- name: Configure WoeUSB
+  ansible.builtin.include_tasks: woeusb.yml
