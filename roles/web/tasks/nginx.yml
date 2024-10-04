@@ -7,7 +7,6 @@
 - name: Create nginx Docker network
   community.docker.docker_network:
     name: nginx_network
-    state: present
     internal: false
 
 - name: Create custom nginx conf file
@@ -22,7 +21,6 @@
   community.docker.docker_container:
     name: nginx-proxy
     pull: always
-    state: started
     image: nginxproxy/nginx-proxy:1.6
     restart_policy: "always"
     networks:
@@ -41,7 +39,6 @@
   community.docker.docker_container:
     name: nginx-proxy-acme-companion
     pull: always
-    state: started
     image: nginxproxy/acme-companion:2.4
     restart_policy: "always"
     networks:
