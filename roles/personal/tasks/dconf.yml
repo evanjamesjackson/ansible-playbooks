@@ -94,7 +94,7 @@
         value: "['pop-cosmic@system76.com', 'pop-shell@system76.com', 'system76-power@system76.com', 'ubuntu-appindicators@ubuntu.com', 'cosmic-dock@system76.com', 'cosmic-workspaces@system76.com', 'popx11gestures@system76.com', 'unredirect@vaina.lt', 'user-theme@gnome-shell-extensions.gcampax.github.com']"
       docked_apps:
         key: "{{ gnome_shell }}/favorite-apps"
-        value: "['org.gnome.Terminal.desktop', 'io.gitlab.librewolf-community.desktop', 'tv.plex.PlexDesktop.desktop', 'steam.desktop']"
+        value: "['org.gnome.Terminal.desktop', 'io.gitlab.librewolf-community.desktop', 'tv.plex.PlexDesktop.desktop', 'steam.desktop', 'com.spotify.Client.desktop']"
       hide_applications_button:
         key: "{{ gnome_shell }}/extensions/pop-cosmic/show-applications-button"
         value: "false"
