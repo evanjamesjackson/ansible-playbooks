@@ -21,5 +21,5 @@
   ansible.builtin.user:
     name: "{{ username }}"
     append: true
-    group: "{{ item.value.groups }}"
+    groups: "{{ item.value.groups }}"
   loop: "{{ service_users | dict2items }}"
