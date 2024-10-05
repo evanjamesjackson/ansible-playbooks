@@ -18,3 +18,10 @@
     groups: docker
     append: true
   register: add_to_docker_group_result
+
+- name: Create cron job to prune Docker objects
+  become: true
+  ansible.builtin.cron:
+    name: "Run Docker system prune"
+    special_time: daily
+    job: "docker system prune -af"
