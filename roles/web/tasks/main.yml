@@ -21,5 +21,3 @@
 
 - name: Configure home theater services
   ansible.builtin.include_tasks: home_theater.yml
-# TODO minecraft
-# TODO lastipy
