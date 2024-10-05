@@ -1,4 +1,4 @@
-- name: Install WoeUSB
+- name: Install WoeUSB (for creating Windows installations)
   block:
     - name: Install WoeUSB dependencies
       become: true
