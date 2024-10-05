@@ -11,14 +11,14 @@
       TZ: "{{ timezone }}"
       MACHINE_NAME: "{{ hostname }}"
     ports:
-      - "7396:7396/tcp"
+      - "{{ foldingathome_port }}:7396/tcp"
     volumes:
       - foldingathome_config:/config
 
 - name: Open Folding@home port in UFW
   become: true
   community.general.ufw:
-    port: "7396"
+    port: "{{ foldingathome_port }}"
     proto: tcp
     rule: allow
     direction: in

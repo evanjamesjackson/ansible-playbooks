@@ -6,7 +6,7 @@
     image: netdata/netdata:latest
     restart_policy: unless-stopped
     ports:
-      - "19999:19999/tcp"
+      - "{{ netdata_port }}:19999/tcp"
     capabilities:
       - SYS_PTRACE
     security_opts:
@@ -28,7 +28,7 @@
 - name: Open Netdata port in UFW
   become: true
   community.general.ufw:
-    port: "19999"
+    port: "{{ netdata_port }}"
     proto: tcp
     rule: allow
     direction: in

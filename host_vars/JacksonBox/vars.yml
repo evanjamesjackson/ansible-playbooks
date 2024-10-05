@@ -52,15 +52,16 @@ service_users:
 # NGINX Docker network shared by services that should be forwarded to the reverse proxy
 nginx_network: "nginx_network"
 
-# Services domains
+# ddclient
 domain_name: "jacksonnet.ca"
 ddclient_domains: "geysermc,minecraft,sonarr,radarr,nextcloud,vpn"
-nextcloud_domain_name: "nextcloud.jacksonnet.ca"
-vpn_domain_name: "vpn.jacksonnet.ca"
-radarr_domain_name: "radarr.jacksonnet.ca"
-sonarr_domain_name: "sonarr.jacksonnet.ca"
+ddclient_protocol: "namecheap"
 
-# Location of Nextcloud data
+# Folding@home
+foldingathome_port: "7396"
+
+# Nextcloud
+nextcloud_domain_name: "nextcloud.jacksonnet.ca"
 nextcloud_data_dir: "/hdd/nextcloud/app/data"
 
 # Media
@@ -69,3 +70,13 @@ home_theater_repo_dest: "{{ home_directory }}/home-theater"
 plex_port: "32400"
 prowlarr_port: "9696"
 qbittorrent_port: "9091"
+radarr_domain_name: "radarr.jacksonnet.ca"
+sonarr_domain_name: "sonarr.jacksonnet.ca"
+
+# Wireguard
+vpn_domain_name: "vpn.jacksonnet.ca"
+wireguard_port: "51820"
+wireguard_webui_port: "51821"
+
+# Netdata
+netdata_port: "19999"

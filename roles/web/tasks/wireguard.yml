@@ -12,8 +12,8 @@
       - NET_ADMIN
       - SYS_MODULE
     ports:
-      - "51820:51820/udp"
-      - "51821:51821/tcp"
+      - "{{ wireguard_port }}:51820/udp"
+      - "{{ wireguard_webui_port }}:51821/tcp"
     env:
       WG_HOST: "{{ vpn_domain_name }}"
     volumes:
@@ -22,14 +22,14 @@
 - name: Open Wireguard (UDP) port in UFW
   become: true
   community.general.ufw:
-    port: "51820"
+    port: "{{ wireguard_port }}"
     proto: udp
     rule: allow
 
 - name: Open Wireguard GUI port in UFW
   become: true
   community.general.ufw:
-    port: "51821"
+    port: "{{ wireguard_webui_port }}"
     proto: tcp
     rule: allow
     direction: in
