@@ -18,7 +18,7 @@
       ssl=yes
       syslog=yes
       use=web,web=dynamicdns.park-your-domain.com/getip
-      protocol={{ ddclient_protcol }}
+      protocol={{ ddclient_protocol }}
       server=dynamicdns.park-your-domain.com
       login={{ domain_name }}
       password={{ dynamic_dns_password }}
