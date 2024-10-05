@@ -57,6 +57,15 @@ domain_name: "jacksonnet.ca"
 ddclient_domains: "geysermc,minecraft,sonarr,radarr,nextcloud,vpn"
 nextcloud_domain_name: "nextcloud.jacksonnet.ca"
 vpn_domain_name: "vpn.jacksonnet.ca"
+radarr_domain_name: "radarr.jacksonnet.ca"
+sonarr_domain_name: "sonarr.jacksonnet.ca"
 
 # Location of Nextcloud data
 nextcloud_data_dir: "/hdd/nextcloud/app/data"
+
+# Media
+media_data_dir: "/hdd/home-theater"
+home_theater_repo_dest: "{{ home_directory }}/home-theater"
+plex_port: "32400"
+prowlarr_port: "9696"
+qbittorrent_port: "9091"

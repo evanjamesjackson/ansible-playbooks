@@ -1,15 +1,55 @@
-# TODO Docker containers
+- name: Clone home-theater repository
+  become: true
+  become_user: "{{ username }}"
+  ansible.builtin.git:
+    repo: git@github.com:evanjamesjackson/home-theater.git
+    key_file: "{{ github_key_file }}"
+    dest: "{{ home_theater_repo_dest }}"
+    version: main
+
+- name: Create .env file
+  ansible.builtin.copy:
+    dest: "{{ home_theater_repo_dest }}/.env"
+    force: true
+    content: |
+      TZ="{{ timezone }}"
+      PUID="{{ service_users.media.uid }}"
+      PGID="{{ service_users.media.gid }}"
+      MEDIA_ROOT="{{ media_data_dir }}"
+      PLEX_PORT="{{ plex_port }}"
+      PROWLARR_PORT="{{ prowlarr_port }}"
+      QBITTORRENT_PORT="{{ qbittorrent_port }}"
+      NGINX_PROXY_NETWORK="{{ nginx_network }}"
+      SONARR_HOSTNAME="{{ sonarr_domain_name }}"
+      RADARR_HOSTNAME="{{ radarr_domain_name }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+
+- name: Upload Wireguard configuration file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/wg0.conf"
+    dest: "{{ home_theater_repo_dest }}/wg0.conf"
+    force: true
+    mode: 0755
+
+- name: Start services via Docker Compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_theater_repo_dest }}"
+    project_name: "home-theater"
+    pull: always
+
 - name: Open Plex port
   become: yes
   community.general.ufw:
-    port: "32400"
+    port: "{{ plex_port }}"
     proto: tcp
     rule: allow
 
 - name: Open Prowlarr port
   become: yes
   community.general.ufw:
-    port: "9696"
+    port: "{{ prowlarr_port }}"
     proto: tcp
     rule: allow
     direction: in
@@ -19,7 +59,7 @@
 - name: Open qBitTorrent port
   become: yes
   community.general.ufw:
-    port: "9091"
+    port: "{{ qbittorrent_port }}"
     proto: tcp
     rule: allow
     direction: in

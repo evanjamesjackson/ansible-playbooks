@@ -1,1 +1,2 @@
-secret.yml
+**/*/secret.yml
+roles/web/files/wg0.conf

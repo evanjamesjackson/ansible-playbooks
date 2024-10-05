@@ -32,7 +32,9 @@
       password: YOUR-USERS-PASSWORD-HERE
       ```
 
-      Finally, run `ansible-vault encrypt **/secret.yml` and provide a password to encrypt the files. Note that all `secret.yml` files are ignored by `.gitignore`.
+5. Get a Wireguard configuration file from your VPN provider and place it at `roles/web/files/wg0.conf`.
+
+6. Run `ansible-vault encrypt **/secret.yml roles/web/files/wg0.conf` and provide a password to encrypt the files. Note that all `secret.yml` files are ignored by `.gitignore`.
 
 ## Running
 
