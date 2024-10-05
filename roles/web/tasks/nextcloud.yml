@@ -49,3 +49,4 @@
     networks:
       - name: nextcloud_internal_network
       - name: "{{ nginx_network }}"
+# TODO backups
