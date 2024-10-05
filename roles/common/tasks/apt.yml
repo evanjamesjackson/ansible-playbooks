@@ -4,12 +4,12 @@
     update_cache: yes
     upgrade: yes
 
-- name: Add custom APT repositories
+- name: Add APT repositories
   become: true
   ansible.builtin.apt_repository:
     repo: "{{ item }}"
-  loop: "{{ custom_apt_repositories }}"
-  when: custom_apt_repositories is defined and custom_apt_repositories != None
+  loop: "{{ apt_repositories }}"
+  when: apt_repositories is defined and apt_repositories != None
 
 - name: Set apt_packages to empty list if undefined
   ansible.builtin.set_fact:

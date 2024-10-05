@@ -3,7 +3,7 @@ hostname: EvanAsus
 timezone: "America/Toronto"
 
 # APT vars
-custom_apt_repositories:
+apt_repositories:
   - "ppa:libretro/stable"
 apt_packages:
   - audacity
