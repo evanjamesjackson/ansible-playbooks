@@ -2,7 +2,6 @@
   community.docker.docker_container:
     name: foldingathome
     pull: always
-    state: started
     image: lscr.io/linuxserver/foldingathome:latest
     restart_policy: unless-stopped
     env:

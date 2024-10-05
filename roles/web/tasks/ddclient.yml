@@ -28,7 +28,6 @@
   community.docker.docker_container:
     name: ddclient
     pull: always
-    state: started
     image: lscr.io/linuxserver/ddclient:latest
     restart_policy: unless-stopped
     env:

@@ -2,7 +2,6 @@
   community.docker.docker_container:
     name: wireguard
     pull: always
-    state: started
     image: ghcr.io/wg-easy/wg-easy
     restart_policy: "always"
     sysctls:

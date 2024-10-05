@@ -2,7 +2,6 @@
   community.docker.docker_container:
     name: netdata
     pull: always
-    state: started
     image: netdata/netdata:latest
     restart_policy: unless-stopped
     ports:
