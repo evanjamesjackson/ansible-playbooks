@@ -27,11 +27,13 @@
 
 # TODO unattended upgrades
 
-- name: Check if reboot required post-setup
-  ansible.builtin.stat:
-    path: /var/run/reboot-required
-  register: reboot_required_file
-
 - name: Reboot if required
-  ansible.builtin.reboot:
-  when: reboot_required_file.stat.exists and trigger_reboots is defined and trigger_reboots
+  when: trigger_reboots is defined and trigger_reboots
+  block:
+    - name: Check for presence of reboot-required file
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: reboot_required_file
+    - name: Reboot if required
+      ansible.builtin.reboot:
+      when: reboot_required_file.stat.exists
