@@ -16,13 +16,7 @@
     name: "{{ item }}"
     state: present
     method: user
-  loop:
-    - librewolf
-    - tv.plex.PlexDesktop
-    - com.spotify.Client
-    - com.github.tchx84.Flatseal
-    - org.DolphinEmu.dolphin-emu
-    - net.pcsx2.PCSX2
+  loop: "{{ flatpaks }}"
 
 - name: Update Flatpaks
   ansible.builtin.shell:
