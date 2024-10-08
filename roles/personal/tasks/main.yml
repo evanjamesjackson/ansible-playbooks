@@ -12,9 +12,6 @@
     state: directory
     mode: 0755
 
-- name: Configure SSH client settings
-  ansible.builtin.include_tasks: ssh_client.yml
-
 - name: Install .debs not available in APT
   ansible.builtin.include_tasks: debs.yml
 
