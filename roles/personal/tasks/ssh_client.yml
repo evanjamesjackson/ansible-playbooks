@@ -8,7 +8,7 @@
     user: "{{ username }}"
     host: "{{ item.value.host }}"
     hostname: "{{ item.value.hostname }}"
-    identity_file: "{{ ssh_key_file }}"
+    identity_file: "{{ item.value.identity_file if 'identity_file' in item.value else ssh_key_file }}"
     add_keys_to_agent: true
     state: present
   loop: "{{ ssh_config_hosts | dict2items }}"
