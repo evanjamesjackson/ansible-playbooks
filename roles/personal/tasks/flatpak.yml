@@ -18,7 +18,6 @@
     method: user
   loop:
     - librewolf
-    - com.brave.Browser
     - tv.plex.PlexDesktop
     - com.spotify.Client
     - com.github.tchx84.Flatseal
