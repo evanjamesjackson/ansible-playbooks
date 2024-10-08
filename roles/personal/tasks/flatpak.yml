@@ -1,27 +1,30 @@
-- name: Install flatpak
-  become: true
-  ansible.builtin.package:
-    name:
-      - flatpak
+- name: Configure Flatpak
+  when: flatpaks is defined
+  block:
+    - name: Install flatpak package
+      become: true
+      ansible.builtin.package:
+        name:
+          - flatpak
 
-- name: Add the Flathub Flatpak repository remote to the user installation
-  community.general.flatpak_remote:
-    name: flathub
-    state: present
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    method: user
+    - name: Add the Flathub Flatpak repository remote to the user installation
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        method: user
 
-- name: Install Flatpaks
-  community.general.flatpak:
-    name: "{{ item }}"
-    state: present
-    method: user
-  loop: "{{ flatpaks }}"
+    - name: Install Flatpaks
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+        method: user
+      loop: "{{ flatpaks }}"
 
-- name: Update Flatpaks
-  ansible.builtin.shell:
-    cmd: flatpak --user update --noninteractive
-    executable: /bin/bash
-  register: result
-  changed_when: result.stdout != 'Nothing to do.'
-  failed_when: result.rc != 0
+    - name: Update Flatpaks
+      ansible.builtin.shell:
+        cmd: flatpak --user update --noninteractive
+        executable: /bin/bash
+      register: result
+      changed_when: result.stdout != 'Nothing to do.'
+      failed_when: result.rc != 0
