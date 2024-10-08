@@ -3,7 +3,7 @@
     path: "{{ ssh_key_file }}"
     type: ed25519
 
-- name: Add JacksonBox reference to config file
+- name: Add references to config file
   community.general.ssh_config:
     user: "{{ username }}"
     host: "{{ item.value.host }}"
@@ -12,12 +12,4 @@
     add_keys_to_agent: true
     state: present
   loop: "{{ ssh_config_hosts | dict2items }}"
-
-- name: Add RaspberryPi reference to config file
-  community.general.ssh_config:
-    user: "{{ username }}"
-    host: "{{ hostvars['RaspberryPi']['hostname'] }}"
-    hostname: "{{ hostvars['RaspberryPi']['domain'] }}"
-    identity_file: "{{ ssh_key_file }}"
-    add_keys_to_agent: true
-    state: present
+  when: ssh_config_hosts is defined
