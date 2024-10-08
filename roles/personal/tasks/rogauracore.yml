@@ -8,6 +8,7 @@
 - name: Install rogauracore
   become: yes
   ansible.builtin.shell:
+    chdir: /tmp
     cmd: |
       ROGAURACORE_VERSION=1.6
       curl -LOs https://github.com/wroberts/rogauracore/releases/download/$ROGAURACORE_VERSION/rogauracore-$ROGAURACORE_VERSION.tar.gz
