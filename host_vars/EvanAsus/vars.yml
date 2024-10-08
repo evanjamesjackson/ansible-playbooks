@@ -44,6 +44,19 @@ ssh_config_hosts:
     host: "{{ hostvars['RaspberryPi']['hostname'] }}"
     hostname: "{{ hostvars['RaspberryPi']['domain'] }}"
 
+# DEBs
+debs:
+  vscode:
+    url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+    filename: "/tmp/vscode.deb"
+    checksum: "sha256:f2c1e7d061b0c267342293b6c363cd07f5efcea24a66ea968aca700e8d065fb4"
+  wireguird:
+    url: "https://github.com/UnnoTed/wireguird/releases/download/v1.1.0/wireguird_amd64.deb"
+    filename: "/tmp/wireguird.deb"
+  minecraft:
+    url: "https://launcher.mojang.com/download/Minecraft.deb"
+    filename: "/tmp/minecraft.deb"
+
 # Flatpaks
 flatpaks:
   - librewolf

@@ -1,26 +1,11 @@
-- name: Download and install .deb's not available in APT
-  become: true
-  vars:
-    debs:
-      vscode:
-        url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-        filename: "/tmp/vscode.deb"
-        checksum: "sha256:f2c1e7d061b0c267342293b6c363cd07f5efcea24a66ea968aca700e8d065fb4"
-      wireguird:
-        url: "https://github.com/UnnoTed/wireguird/releases/download/v1.1.0/wireguird_amd64.deb"
-        filename: "/tmp/wireguird.deb"
-      minecraft:
-        url: "https://launcher.mojang.com/download/Minecraft.deb"
-        filename: "/tmp/minecraft.deb"
-  block:
-    - name: Download .deb files
-      ansible.builtin.get_url:
-        url: "{{ item.value.url }}"
-        checksum: "{{ item.value.checksum if 'checksum' in item.value else '' }}"
-        dest: "{{ item.value.filename }}"
-        mode: 0755
-      loop: "{{ debs | dict2items }}"
-    - name: Install .deb's
-      ansible.builtin.apt:
-        deb: "{{ item.value.filename }}"
-      loop: "{{ debs | dict2items }}"
+- name: Download .deb files
+  ansible.builtin.get_url:
+    url: "{{ item.value.url }}"
+    checksum: "{{ item.value.checksum if 'checksum' in item.value else '' }}"
+    dest: "{{ item.value.filename }}"
+    mode: 0755
+  loop: "{{ debs | dict2items }}"
+- name: Install .deb's
+  ansible.builtin.apt:
+    deb: "{{ item.value.filename }}"
+  loop: "{{ debs | dict2items }}"
