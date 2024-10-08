@@ -35,6 +35,15 @@ ssh_key_file: "/home/ejackson/.ssh/id_ed25519"
 github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
 dotfiles_branch: personal
 
+# SSH config hosts
+ssh_config_hosts:
+  JacksonBox:
+    host: "{{ hostvars['JacksonBox']['hostname'] }}"
+    hostname: "{{ hostvars['JacksonBox']['domain'] }}"
+  RasperryPi:
+    host: "{{ hostvars['RaspberryPi']['hostname'] }}"
+    hostname: "{{ hostvars['RaspberryPi']['domain'] }}"
+
 # Flatpaks
 flatpaks:
   - librewolf

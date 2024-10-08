@@ -6,11 +6,12 @@
 - name: Add JacksonBox reference to config file
   community.general.ssh_config:
     user: "{{ username }}"
-    host: "{{ hostvars['JacksonBox']['hostname'] }}"
-    hostname: "{{ hostvars['JacksonBox']['domain'] }}"
+    host: "{{ item.value.host }}"
+    hostname: "{{ item.value.hostname }}"
     identity_file: "{{ ssh_key_file }}"
     add_keys_to_agent: true
     state: present
+  loop: "{{ ssh_config_hosts | dict2items }}"
 
 - name: Add RaspberryPi reference to config file
   community.general.ssh_config:
