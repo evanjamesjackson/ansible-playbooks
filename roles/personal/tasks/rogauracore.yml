@@ -29,7 +29,7 @@
       [Desktop Entry] 
       Type=Application
       Name=rogauracore
-      Exec=bash -c "rogauracore rainbow_cycle 1; rogauracore brightness 1"
+      Exec=bash -c "{{ rogauracore_cmd }}"
       StartupNotify=false
       Terminal=false
   ansible.builtin.copy:

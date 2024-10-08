@@ -50,3 +50,6 @@ fonts:
   ubuntu_mono:
     url: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_version }}/UbuntuMono.zip"
     filename: "/tmp/UbuntuMono.zip"
+
+# rogauracore
+rogauracore_cmd: "rogauracore rainbow_cycle 1; rogauracore brightness 1"
