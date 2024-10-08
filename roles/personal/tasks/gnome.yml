@@ -5,3 +5,229 @@
       - gnome-shell
       - gnome-shell-extensions
       - gnome-shell-extension-manager
+
+- name: Dconf entries
+  vars:
+    wm_keybindings: "/org/gnome/desktop/wm/keybindings"
+    desktop_interface: "/org/gnome/desktop/interface"
+    media_keys: "/org/gnome/settings-daemon/plugins/media-keys"
+    power: "/org/gnome/settings-daemon/plugins/power"
+    gnome_shell: "/org/gnome/shell"
+    key_value_pairs:
+      # Keyboard shortcuts/mappings
+      maximize_shortcut:
+        key: "{{ wm_keybindings }}/maximize"
+        value: "['<Super>Up']"
+      show_desktop_shortcut:
+        key: "{{ wm_keybindings }}/show-desktop"
+        value: "['<Super>d']"
+      switch_windows_shortcut:
+        key: "{{ wm_keybindings }}/switch-windows"
+        value: "['<Alt>Tab']"
+      snap_window_left:
+        key: "/org/gnome/mutter/keybindings/toggle-tiled-left"
+        value: "['<Super>Left']"
+      snap_window_right:
+        key: "/org/gnome/mutter/keybindings/toggle-tiled-right"
+        value: "['<Super>Right']"
+      maps_caps_lock_to_ctrl:
+        key: "/org/gnome/desktop/input-sources/xkb-options"
+        value: "['caps:ctrl_modifier']"
+      home_directory_shortcut:
+        key: "{{ media_keys }}/home"
+        value: "['<Super>e']"
+      volume_up_shortcut:
+        key: "{{ media_keys }}/volume-up"
+        value: "['<Primary>Up']"
+      volume_down_shortcut:
+        key: "{{ media_keys }}/volume-down"
+        value: "['<Primary>Down']"
+      custom_shortcuts_list:
+        key: "{{ media_keys }}/custom-keybindings"
+        value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
+      plex_shortcut_name:
+        key: "{{ media_keys }}/custom-keybindings/custom0/name"
+        value: "'Launch Plex'"
+      plex_shortcut_binding:
+        key: "{{ media_keys }}/custom-keybindings/custom0/binding"
+        value: "'<Primary><Alt>p'"
+      plex_shortcut_command:
+        key: "{{ media_keys }}/custom-keybindings/custom0/command"
+        value: "'flatpak run tv.plex.PlexDesktop'"
+      terminal_shortcut_name:
+        key: "{{ media_keys }}/custom-keybindings/custom1/name"
+        value: "'Launch Terminal'"
+      terminal_shortcut_binding:
+        key: "{{ media_keys }}/custom-keybindings/custom1/binding"
+        value: "'<Primary><Alt>t'"
+      terminal_shortcut_command:
+        key: "{{ media_keys }}/custom-keybindings/custom1/command"
+        value: "'gnome-terminal'"
+      # Display
+      disable_hidpi:
+        key: "/com/system76/hidpi/enable"
+        value: "false"
+      enable_lodpi_mode:
+        key: "/com/system76/hidpi/mode"
+        value: "'lodpi'"
+      # Theme
+      color_scheme:
+        key: "{{ desktop_interface }}/color-scheme"
+        value: "'prefer-dark'"
+      font_antialiasing:
+        key: "{{ desktop_interface }}/font-antialiasing"
+        value: "'grayscale'"
+      font_hinting:
+        key: "{{ desktop_interface }}/font-hinting"
+        value: "'slight'"
+      icon_theme:
+        key: "{{ desktop_interface }}/icon-theme"
+        value: "'Adwaita'"
+      user_theme:
+        key: "/org/gnome/shell/extensions/user-theme/name"
+        value: "'Pop-dark'"
+      # Power settings
+      ac_sleep_setting:
+        key: "{{ power }}/sleep-inactive-ac-type"
+        value: "'nothing'"
+      battery_sleep_setting:
+        key: "{{ power }}/sleep-inactive-battery-type"
+        value: "'nothing'"
+      # GNOME shell settings
+      enable_user_extensions:
+        key: "{{ gnome_shell }}/disable-user-extensions"
+        value: "false"
+      define_enabled_extensions:
+        key: "{{ gnome_shell }}/enabled-extensions"
+        value: "['pop-cosmic@system76.com', 'pop-shell@system76.com', 'system76-power@system76.com', 'ubuntu-appindicators@ubuntu.com', 'cosmic-dock@system76.com', 'cosmic-workspaces@system76.com', 'popx11gestures@system76.com', 'unredirect@vaina.lt', 'user-theme@gnome-shell-extensions.gcampax.github.com']"
+      docked_apps:
+        key: "{{ gnome_shell }}/favorite-apps"
+        value: "['org.gnome.Terminal.desktop', 'io.gitlab.librewolf-community.desktop', 'tv.plex.PlexDesktop.desktop', 'steam.desktop', 'com.spotify.Client.desktop']"
+      hide_applications_button:
+        key: "{{ gnome_shell }}/extensions/pop-cosmic/show-applications-button"
+        value: "false"
+      hide_workspaces_button:
+        key: "{{ gnome_shell }}/extensions/pop-cosmic/show-workspaces-button"
+        value: "false"
+      # Date and time
+      automatic_timezone:
+        key: "/org/gnome/desktop/datetime/automatic-timezone"
+        value: "true"
+      show_date:
+        key: "/org/gnome/desktop/interface/clock-show-date"
+        value: "true"
+      clock_format:
+        key: "/org/gnome/desktop/interface/clock-format"
+        value: "'12h'"
+      # Device behavior
+      automount:
+        key: "/org/gnome/desktop/media-handling/automount"
+        value: "false"
+      disable_natural_scroll:
+        key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
+        value: "false"
+      enable_two_finger_scrolling:
+        key: "/org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled"
+        value: "true"
+  block:
+    - name: Dconf entries
+      community.general.dconf:
+        key: "{{ item.value.key }}"
+        value: "{{ item.value.value }}"
+      loop: "{{ key_value_pairs | dict2items }}"
+
+# Loading terminal preferences via the dconf module is tedious and hard to maintain,
+# so using a .dconf file and loading that instead seems better
+- name: Write terminal preferences to file
+  vars:
+    terminal_prefs: |
+      [/]
+      default='8481259a-b760-4d77-a61e-9d0d255732ce'
+      list=['8481259a-b760-4d77-a61e-9d0d255732ce']
+
+      [:8481259a-b760-4d77-a61e-9d0d255732ce]
+      audible-bell=false
+      background-color='#2E3440'
+      background-transparency-percent=15
+      bold-color='#D8DEE9'
+      bold-color-same-as-fg=true
+      cursor-background-color='rgb(216,222,233)'
+      cursor-colors-set=true
+      cursor-foreground-color='rgb(59,66,82)'
+      custom-command='/usr/bin/fish'
+      font='UbuntuMono Nerd Font Mono 20'
+      foreground-color='#D8DEE9'
+      highlight-background-color='rgb(136,192,208)'
+      highlight-colors-set=true
+      highlight-foreground-color='rgb(46,52,64)'
+      login-shell=false
+      nord-gnome-terminal-version='0.1.0'
+      palette=['#3B4252', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#88C0D0', '#E5E9F0', '#4C566A', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#8FBCBB', '#ECEFF4']
+      use-custom-command=true
+      use-system-font=false
+      use-theme-background=false
+      use-theme-colors=false
+      use-theme-transparency=false
+      use-transparent-background=true
+      visible-name='Nord'
+
+      [:8481259a-b760-4d77-a61e-9d0d255732ce/legacy/keybindings]
+      zoom-in='<Primary>equal'
+
+      [:8481259a-b760-4d77-a61e-9d0d255732ce/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+      audible-bell=false
+      background-color='rgb(0,43,54)'
+      background-transparency-percent=8
+      custom-command='/usr/bin/fish'
+      font='UbuntuMono Nerd Font Mono 19'
+      foreground-color='rgb(131,148,150)'
+      use-custom-command=true
+      use-system-font=false
+      use-theme-colors=false
+      use-theme-transparency=false
+      use-transparent-background=true
+
+      [:default/legacy/keybindings]
+      zoom-in='<Primary>equal'
+
+      [:default/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+      audible-bell=false
+      background-color='rgb(0,43,54)'
+      background-transparency-percent=8
+      custom-command='/usr/bin/fish'
+      font='UbuntuMono Nerd Font Mono 19'
+      foreground-color='rgb(131,148,150)'
+      use-custom-command=true
+      use-system-font=false
+      use-theme-colors=false
+      use-theme-transparency=false
+      use-transparent-background=true
+
+      [legacy/keybindings]
+      zoom-in='<Primary>equal'
+
+      [legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+      audible-bell=false
+      background-color='rgb(0,43,54)'
+      background-transparency-percent=8
+      custom-command='/usr/bin/fish'
+      font='UbuntuMono Nerd Font Mono 19'
+      foreground-color='rgb(131,148,150)'
+      use-custom-command=true
+      use-system-font=false
+      use-theme-colors=false
+      use-theme-transparency=false
+      use-transparent-background=true
+  ansible.builtin.copy:
+    dest: "/tmp/nord_terminal.dconf"
+    force: false
+    content: "{{ terminal_prefs }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+
+- name: Load terminal preferences
+  ansible.builtin.shell: dconf load /org/gnome/terminal/legacy/profiles:/ < /tmp/nord_terminal.dconf
+  register: result
+  changed_when: false
+  failed_when: result.rc != 0

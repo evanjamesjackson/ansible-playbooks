@@ -27,12 +27,6 @@
 - name: Configure GNOME
   ansible.builtin.include_tasks: gnome.yml
 
-- name: Configure dconf settings
-  ansible.builtin.include_tasks: dconf.yml
-
-- name: Configure GNOME terminal
-  ansible.builtin.include_tasks: terminal.yml
-
 - name: Configure ProtonVPN
   ansible.builtin.include_tasks: protonvpn.yml
 
