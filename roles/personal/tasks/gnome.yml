@@ -14,17 +14,20 @@
 
 # Loading terminal preferences via the dconf module is tedious and hard to maintain,
 # so using a .dconf file and loading that instead seems better
-- name: Write terminal preferences to file
-  ansible.builtin.copy:
-    dest: "/tmp/nord_terminal.dconf"
-    force: false
-    content: "{{ gnome_terminal_prefs }}"
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: 0755
-
-- name: Load terminal preferences
-  ansible.builtin.shell: dconf load /org/gnome/terminal/legacy/profiles:/ < /tmp/nord_terminal.dconf
-  register: result
-  changed_when: false
-  failed_when: result.rc != 0
+- name: Configure terminal preferences
+  vars:
+    terminal_prefs_file: "/tmp/terminal.dconf"
+  block:
+    - name: Write terminal preferences to file
+      ansible.builtin.copy:
+        dest: "{{ terminal_prefs_file }}"
+        force: false
+        content: "{{ gnome_terminal_prefs }}"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: 0755
+    - name: Load terminal preferences
+      ansible.builtin.shell: dconf load /org/gnome/terminal/legacy/profiles:/ < {{ terminal_prefs_file }}
+      register: result
+      changed_when: false
+      failed_when: result.rc != 0
