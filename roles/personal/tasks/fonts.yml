@@ -1,24 +1,16 @@
-- name: Download and install Nerd Fonts
-  vars:
-    nerd_fonts_version: "v3.1.0"
-    fonts:
-      ubuntu_mono:
-        url: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_version }}/UbuntuMono.zip"
-        filename: "/tmp/UbuntuMono.zip"
-  block:
-    - name: Download fonts
-      ansible.builtin.get_url:
-        url: "{{ item.value.url }}"
-        dest: "{{ item.value.filename }}"
-        mode: 0755
-      loop: "{{ fonts | dict2items }}"
-    - name: Install fonts # noqa command-instead-of-module
-      ansible.builtin.shell:
-        cmd: |
-          unzip -o {{ item.value.filename }} -d ~/.fonts
-          fc-cache -fv
-        executable: /bin/bash
-      register: result
-      changed_when: false
-      failed_when: result.rc != 0
-      loop: "{{ fonts | dict2items }}"
+- name: Download fonts
+  ansible.builtin.get_url:
+    url: "{{ item.value.url }}"
+    dest: "{{ item.value.filename }}"
+    mode: 0755
+  loop: "{{ fonts | dict2items }}"
+- name: Install fonts # noqa command-instead-of-module
+  ansible.builtin.shell:
+    cmd: |
+      unzip -o {{ item.value.filename }} -d ~/.fonts
+      fc-cache -fv
+    executable: /bin/bash
+  register: result
+  changed_when: false
+  failed_when: result.rc != 0
+  loop: "{{ fonts | dict2items }}"

@@ -43,3 +43,10 @@ flatpaks:
   - com.github.tchx84.Flatseal
   - org.DolphinEmu.dolphin-emu
   - net.pcsx2.PCSX2
+
+# Fonts
+nerd_fonts_version: "v3.1.0"
+fonts:
+  ubuntu_mono:
+    url: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_version }}/UbuntuMono.zip"
+    filename: "/tmp/UbuntuMono.zip"
