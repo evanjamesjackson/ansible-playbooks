@@ -6,7 +6,7 @@
 
 - name: Create nginx Docker network
   community.docker.docker_network:
-    name: nginx_network
+    name: "{{ nginx_network }}"
     internal: false
 
 - name: Create custom nginx conf file
