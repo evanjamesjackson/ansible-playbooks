@@ -50,12 +50,15 @@ debs:
     url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
     filename: "/tmp/vscode.deb"
     checksum: "sha256:0c867923b3de247a0b1b0cf3b1a756db5ccb462095dc1fa40f5c579a6b43898e"
+    package: "code"
   wireguird:
     url: "https://github.com/UnnoTed/wireguird/releases/download/v1.1.0/wireguird_amd64.deb"
     filename: "/tmp/wireguird.deb"
+    package: "wireguird"
   minecraft:
     url: "https://launcher.mojang.com/download/Minecraft.deb"
     filename: "/tmp/minecraft.deb"
+    package: "minecraft-launcher"
 
 # Flatpaks
 flatpaks:
