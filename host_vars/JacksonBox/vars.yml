@@ -54,7 +54,7 @@ nginx_network: "nginx_network"
 
 # ddclient
 domain_name: "jacksonnet.ca"
-ddclient_domains: "geysermc,minecraft,sonarr,radarr,nextcloud,vpn"
+ddclient_domains: "geysermc1,minecraft1,sonarr,radarr,nextcloud,vpn"
 ddclient_protocol: "namecheap"
 
 # Folding@home
