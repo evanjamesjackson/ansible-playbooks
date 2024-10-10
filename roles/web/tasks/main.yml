@@ -21,3 +21,7 @@
 
 - name: Configure home theater services
   ansible.builtin.include_tasks: home_theater.yml
+
+- name: Configure Minecraft servers
+  ansible.builtin.include_tasks: minecraft.yml
+  loop: "{{ minecraft_servers | dict2items }}"

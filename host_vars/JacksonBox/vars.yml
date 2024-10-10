@@ -80,3 +80,11 @@ wireguard_webui_port: "51821"
 
 # Netdata
 netdata_port: "19999"
+
+# Minecraft
+minecraft_servers:
+  minecraft1:
+    version: 1.21.1
+    directory: "{{ home_directory }}/minecraft1"
+    java_port: 25565
+    bedrock_port: 19132

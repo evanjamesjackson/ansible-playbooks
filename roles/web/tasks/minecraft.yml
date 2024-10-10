@@ -1,0 +1,60 @@
+- name: Clone Minecraft Docker repository
+  become: true
+  become_user: "{{ username }}"
+  ansible.builtin.git:
+    repo: git@github.com:evanjamesjackson/minecraft-docker.git
+    key_file: "{{ github_key_file }}"
+    dest: "{{ item.value.directory }}"
+    version: main
+
+- name: Create .env file
+  ansible.builtin.copy:
+    dest: "{{ item.value.directory }}/.env"
+    force: true
+    content: |
+      MINECRAFT_VERSION="{{ item.value.version }}"
+      PUID="{{ service_users.minecraft.uid }}"
+      PGID="{{ service_users.minecraft.gid }}"
+      JAVA_PORT="{{ item.value.java_port }}"
+      BEDROCK_PORT="{{ item.value.bedrock_port }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+
+- name: Create config files from samples
+  ansible.builtin.shell:
+    chdir: "{{ item.value.directory }}/config"
+    executable: "/bin/bash"
+    cmd: |
+      for i in *.sample
+      do
+        file=${i%%.sample}
+        if [ ! -f $file ]; then
+          cp -a $i $file
+        fi
+      done
+  register: result
+  changed_when: false
+  failed_when: result.rc != 0
+
+# TODO apply custom config changes
+
+- name: Start services via Docker Compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ item.value.directory }}"
+    pull: always
+
+- name: Open Java port
+  become: yes
+  community.general.ufw:
+    port: "{{ item.value.java_port }}"
+    proto: tcp
+    rule: allow
+
+- name: Open Bedrock port
+  become: yes
+  community.general.ufw:
+    port: "{{ item.value.bedrock_port }}"
+    proto: udp
+    rule: allow
+# TODO backups
