@@ -1,13 +1,14 @@
-- name: Download .deb
-  ansible.builtin.get_url:
-    url: "{{ item.value.url }}"
-    checksum: "{{ item.value.checksum if 'checksum' in item.value else '' }}"
-    dest: "{{ item.value.filename }}"
-    mode: 0755
+- name: Download and install package via .deb file (if it isn't already installed)
   when: item.value.package not in ansible_facts.packages
+  block:
+    - name: Download .deb
+      ansible.builtin.get_url:
+        url: "{{ item.value.url }}"
+        checksum: "{{ item.value.checksum if 'checksum' in item.value else '' }}"
+        dest: "{{ item.value.filename }}"
+        mode: 0755
 
-- name: Install .deb
-  become: true
-  ansible.builtin.apt:
-    deb: "{{ item.value.filename }}"
-  when: item.value.package not in ansible_facts.packages
+    - name: Install package via .deb file
+      become: true
+      ansible.builtin.apt:
+        deb: "{{ item.value.filename }}"
