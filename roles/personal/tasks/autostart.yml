@@ -1,0 +1,6 @@
+- name: Register autostart scripts
+  ansible.builtin.copy:
+    content: "{{ item.value.script }}"
+    dest: "{{ home_directory }}/.config/autostart/{{ item.value.filename }}"
+    mode: 0644
+  loop: "{{ autostart_configs | dict2items }}"

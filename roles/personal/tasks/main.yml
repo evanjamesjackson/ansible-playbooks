@@ -20,17 +20,17 @@
 - name: Configure Flatpak
   ansible.builtin.include_tasks: flatpak.yml
 
-- name: Configure fonts
-  ansible.builtin.include_tasks: fonts.yml
-
-- name: Configure GNOME
-  ansible.builtin.include_tasks: gnome.yml
-
-- name: Configure ProtonVPN
-  ansible.builtin.include_tasks: protonvpn.yml
-
 - name: Configure rogauracore
   ansible.builtin.include_tasks: rogauracore.yml
 
 - name: Configure WoeUSB
   ansible.builtin.include_tasks: woeusb.yml
+
+- name: Configure autostart applications
+  ansible.builtin.include_tasks: autostart.yml
+
+- name: Configure GNOME
+  ansible.builtin.include_tasks: gnome.yml
+
+- name: Configure fonts
+  ansible.builtin.include_tasks: fonts.yml

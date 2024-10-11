@@ -59,6 +59,11 @@ debs:
     url: "https://launcher.mojang.com/download/Minecraft.deb"
     filename: "/tmp/minecraft.deb"
     package: "minecraft-launcher"
+  protonvpn:
+    url: "https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.4_all.deb"
+    filename: "/tmp/protonvpn.deb"
+    checksum: "sha256:62a9d849835de8a5664cf95329458bf1966780b15cec420bf707b5f7278b9027"
+    package: protonvpn-app
 
 # Flatpaks
 flatpaks:
@@ -68,6 +73,19 @@ flatpaks:
   - com.github.tchx84.Flatseal
   - org.DolphinEmu.dolphin-emu
   - net.pcsx2.PCSX2
+
+# Autostart
+autostart_configs:
+  protonvpn:
+    filename: "protonvpn.desktop"
+    script: |
+      #!/usr/bin/env xdg-open 
+      [Desktop Entry] 
+      Type=Application
+      Name=protonvpn
+      Exec=bash -c "protonvpn-app"
+      StartupNotify=false
+      Terminal=false
 
 # GNOME
 dconf_entries:
