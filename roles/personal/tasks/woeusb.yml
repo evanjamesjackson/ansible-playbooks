@@ -1,3 +1,4 @@
+# TODO don't run if already installed
 - name: Install WoeUSB (for creating Windows installations)
   block:
     - name: Install WoeUSB dependencies

@@ -1,3 +1,4 @@
+# TODO don't run if already installed
 - name: Install rogauracore dependencies
   become: yes
   ansible.builtin.package:

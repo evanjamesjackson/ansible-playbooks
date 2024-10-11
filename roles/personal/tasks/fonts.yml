@@ -1,3 +1,4 @@
+# TODO don't run if already installed
 - name: Download fonts
   ansible.builtin.get_url:
     url: "{{ item.value.url }}"
