@@ -3,6 +3,7 @@
   ansible.builtin.apt:
     update_cache: yes
     upgrade: yes
+    autoremove: true
 
 - name: Add APT repositories
   become: true
