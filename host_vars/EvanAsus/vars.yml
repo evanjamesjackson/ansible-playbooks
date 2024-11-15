@@ -63,7 +63,7 @@ debs:
     url: "https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.4_all.deb"
     filename: "/tmp/protonvpn.deb"
     checksum: "sha256:62a9d849835de8a5664cf95329458bf1966780b15cec420bf707b5f7278b9027"
-    package: protonvpn-app
+    package: protonvpn-stable-release
 
 # Flatpaks
 flatpaks:
