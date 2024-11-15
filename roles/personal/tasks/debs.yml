@@ -1,7 +1,14 @@
 - name: Download and install package via .deb file (if it isn't already installed)
   when: item.value.package not in ansible_facts.packages
   block:
+    - name: Check if package is already installed
+      ansible.builtin.command: "dpkg-query -W {{ item.value.package }}"
+      register: deb_check
+      failed_when: deb_check.rc > 1
+      changed_when: deb_check.rc == 1
+
     - name: Download .deb
+      when: deb_check.rc == 1
       ansible.builtin.get_url:
         url: "{{ item.value.url }}"
         checksum: "{{ item.value.checksum if 'checksum' in item.value else '' }}"
@@ -9,6 +16,7 @@
         mode: 0755
 
     - name: Install package via .deb file
+      when: deb_check.rc == 1
       become: true
       ansible.builtin.apt:
         deb: "{{ item.value.filename }}"
