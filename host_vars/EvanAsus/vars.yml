@@ -67,7 +67,7 @@ debs:
 
 # Flatpaks
 flatpaks:
-  - librewolf
+  - io.gitlab.librewolf-community
   - tv.plex.PlexDesktop
   - com.spotify.Client
   - com.github.tchx84.Flatseal
@@ -293,3 +293,4 @@ fonts:
 
 # rogauracore
 rogauracore_cmd: "rogauracore rainbow_cycle 1; rogauracore brightness 1"
+rogauracore_version: "1.6"

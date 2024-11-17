@@ -11,15 +11,14 @@
   ansible.builtin.shell:
     chdir: /tmp
     cmd: |
-      ROGAURACORE_VERSION=1.6
-      curl -LOs https://github.com/wroberts/rogauracore/releases/download/$ROGAURACORE_VERSION/rogauracore-$ROGAURACORE_VERSION.tar.gz
-      tar xvf rogauracore-$ROGAURACORE_VERSION.tar.gz
-      cd rogauracore-$ROGAURACORE_VERSION
+      curl -LOs https://github.com/wroberts/rogauracore/releases/download/{{ rogauracore_version }}/rogauracore-{{ rogauracore_version }}.tar.gz
+      tar xvf rogauracore-{{ rogauracore_version }}.tar.gz
+      cd rogauracore-{{ rogauracore_version }}
       ./configure
       make
       make install
       cd ..
-      rm -rf rogauracore-$ROGAURACORE_VERSION.tar.gz rogauracore-$ROGAURACORE_VERSION
+      rm -rf rogauracore-{{ rogauracore_version }}.tar.gz rogauracore-{{ rogauracore_version }}
   register: result
   changed_when: false
   failed_when: result.rc != 0
