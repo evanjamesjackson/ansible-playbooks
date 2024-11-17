@@ -17,14 +17,6 @@
     - name: Install Flatpaks
       community.general.flatpak:
         name: "{{ item }}"
-        state: present
+        state: latest
         method: user
       loop: "{{ flatpaks }}"
-
-    - name: Update Flatpaks
-      ansible.builtin.shell:
-        cmd: flatpak --user update --noninteractive
-        executable: /bin/bash
-      register: result
-      changed_when: result.stdout != 'Nothing to do.'
-      failed_when: result.rc != 0
