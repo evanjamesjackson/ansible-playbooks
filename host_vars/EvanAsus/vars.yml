@@ -13,6 +13,7 @@ apt_packages:
   - dbus-x11
   - eog-plugins
   - gnupg
+  - gnome-screenshot
   - gnome-tweaks
   - libreoffice
   - make
