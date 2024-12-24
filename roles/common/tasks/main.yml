@@ -36,5 +36,5 @@
       register: reboot_required_file
     - name: Reboot if required
       become: true
-      ansible.builtin.reboot:
       when: reboot_required_file.stat.exists
+      ansible.builtin.reboot:
