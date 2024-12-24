@@ -31,6 +31,17 @@
         src: "{{ item }}"
       loop: "{{ local_subnets }}"
 
+    # In case we are connected via VPN, leave Wireguard port open as well
+    - name: Open Wireguard port
+      when: wireguard_port is defined
+      community.general.ufw:
+        rule: allow
+        direction: in
+        port: "{{ wireguard_port }}"
+        proto: tcp
+        src: "{{ item }}"
+      loop: "{{ local_subnets }}"
+
     - name: Enable UFW
       community.general.ufw:
         state: enabled
