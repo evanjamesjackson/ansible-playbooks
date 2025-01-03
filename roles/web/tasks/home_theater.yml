@@ -17,6 +17,7 @@
       PGID="{{ service_users.media.gid }}"
       MEDIA_ROOT="{{ media_data_dir }}"
       PLEX_PORT="{{ plex_port }}"
+      BAZARR_PORT="{{ bazarr_port }}"
       PROWLARR_PORT="{{ prowlarr_port }}"
       QBITTORRENT_PORT="{{ qbittorrent_port }}"
       NGINX_PROXY_NETWORK="{{ nginx_network }}"
@@ -50,6 +51,16 @@
   become: yes
   community.general.ufw:
     port: "{{ prowlarr_port }}"
+    proto: tcp
+    rule: allow
+    direction: in
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"
+
+- name: Open Bazarr port
+  become: yes
+  community.general.ufw:
+    port: "{{ bazarr_port }}"
     proto: tcp
     rule: allow
     direction: in
