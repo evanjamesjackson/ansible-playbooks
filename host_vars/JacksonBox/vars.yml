@@ -89,3 +89,4 @@ minecraft_servers:
     directory: "{{ home_directory }}/minecraft/minecraft1"
     java_port: 25565
     bedrock_port: 19132
+    java_options: "-Xms256M -Xmx2G -XX:+UseG1GC"

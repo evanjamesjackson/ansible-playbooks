@@ -17,6 +17,7 @@
       PGID="{{ service_users.minecraft.gid }}"
       JAVA_PORT="{{ item.value.java_port }}"
       BEDROCK_PORT="{{ item.value.bedrock_port }}"
+      JAVA_OPTIONS="{{ item.value.java_options }}"
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0755
