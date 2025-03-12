@@ -85,7 +85,7 @@ netdata_port: "19999"
 # Minecraft
 minecraft_servers:
   minecraft1:
-    version: "1.20.1"
+    version: "1.21.4"
     directory: "{{ home_directory }}/minecraft/minecraft1"
     java_port: 25565
     bedrock_port: 19132
