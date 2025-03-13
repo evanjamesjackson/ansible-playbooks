@@ -18,6 +18,7 @@
       JAVA_PORT="{{ item.value.java_port }}"
       BEDROCK_PORT="{{ item.value.bedrock_port }}"
       JAVA_OPTIONS="{{ item.value.java_options }}"
+      CUSTOM_PLUGIN_URLS="{{ item.value.custom_plugin_urls }}"
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0755
