@@ -13,7 +13,7 @@
       community.docker.docker_container:
         name: "{{ nextcloud_db_container }}"
         pull: always
-        image: mariadb:latest
+        image: mariadb:11
         restart_policy: unless-stopped
         command: "--transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed"
         env:
@@ -29,7 +29,7 @@
       community.docker.docker_container:
         name: nextcloud-app
         pull: always
-        image: nextcloud:latest
+        image: nextcloud:31-apache
         restart_policy: unless-stopped
         env:
           NEXTCLOUD_TRUSTED_DOMAINS: "{{ nextcloud_domain_name }}" # required to get rid of "untrusted domains" error
