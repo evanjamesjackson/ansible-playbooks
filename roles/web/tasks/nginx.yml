@@ -21,7 +21,7 @@
   community.docker.docker_container:
     name: nginx-proxy
     pull: always
-    image: nginxproxy/nginx-proxy:1.6
+    image: nginxproxy/nginx-proxy:1.7
     restart_policy: "always"
     networks:
       - name: "{{ nginx_network }}"
@@ -39,7 +39,7 @@
   community.docker.docker_container:
     name: nginx-proxy-acme-companion
     pull: always
-    image: nginxproxy/acme-companion:2.4
+    image: nginxproxy/acme-companion:2.5
     restart_policy: "always"
     networks:
       - name: "{{ nginx_network }}"
