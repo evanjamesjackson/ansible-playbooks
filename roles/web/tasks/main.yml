@@ -25,3 +25,6 @@
 - name: Configure Minecraft servers
   ansible.builtin.include_tasks: minecraft.yml
   loop: "{{ minecraft_servers | dict2items }}"
+
+- name: Configure Calibre service
+  ansible.builtin.include_tasks: calibre.yml

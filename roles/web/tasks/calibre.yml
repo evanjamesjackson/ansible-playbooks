@@ -1,0 +1,36 @@
+- name: Pull and run Calibre container
+  community.docker.docker_container:
+    name: calibre
+    pull: always
+    image: lscr.io/linuxserver/calibre:latest
+    restart_policy: unless-stopped
+    env:
+      PUID: "{{ service_users.calibre.uid }}"
+      PGID: "{{ service_users.calibre.gid }}"
+      TZ: "{{ timezone }}"
+    ports:
+      - "{{ calibre_webui_port }}:8080/tcp"
+      - "{{ calibre_content_port }}:8081/tcp"
+    volumes:
+      - calibre_config:/config
+      - "{{ calibre_library_dir }}:/library"
+
+- name: Open Calibre Web UI port in UFW
+  become: true
+  community.general.ufw:
+    port: "{{ calibre_webui_port }}"
+    proto: tcp
+    rule: allow
+    direction: in
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"
+
+- name: Open Calibre content server port in UFW
+  become: true
+  community.general.ufw:
+    port: "{{ calibre_content_port }}"
+    proto: tcp
+    rule: allow
+    direction: in
+    src: "{{ item }}"
+  loop: "{{ local_subnets }}"

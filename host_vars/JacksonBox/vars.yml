@@ -13,6 +13,11 @@ dotfiles_branch: server
 
 # No-login users for owning services
 service_users:
+  calibre:
+    name: "calibre"
+    uid: 1005
+    groups: "calibre"
+    gid: 1005
   ddclient:
     name: "ddclient"
     uid: 995
@@ -51,6 +56,11 @@ service_users:
 
 # NGINX Docker network shared by services that should be forwarded to the reverse proxy
 nginx_network: "nginx_network"
+
+# Calibre
+calibre_webui_port: "8085"
+calibre_content_port: "8086"
+calibre_library_dir: "/hdd/calibre-library"
 
 # ddclient
 domain_name: "jacksonnet.ca"
