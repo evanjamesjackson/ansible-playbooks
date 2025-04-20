@@ -58,8 +58,8 @@ service_users:
 nginx_network: "nginx_network"
 
 # Calibre
-calibre_webui_port: "8085"
-calibre_content_port: "8086"
+calibre_port: "8084"
+calibre_web_port: "8083"
 calibre_library_dir: "/hdd/calibre-library"
 
 # ddclient
