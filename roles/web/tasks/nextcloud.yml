@@ -49,6 +49,6 @@
           - nextcloud-app:/var/www/html
           - "{{ nextcloud_data_dir }}:/var/www/html/data"
         networks:
-          - name: nextcloud_internal_network
+          - name: "{{ nextcloud_network }}"
           - name: "{{ nginx_network }}"
   # TODO backups
