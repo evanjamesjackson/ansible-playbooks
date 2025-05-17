@@ -99,5 +99,5 @@ minecraft_servers:
     directory: "{{ home_directory }}/minecraft/minecraft1"
     java_port: 25565
     bedrock_port: 19132
-    java_options: "-Xms256M -Xmx2G -XX:+UseG1GC"
+    java_options: "-Xms256M -Xmx6G -XX:+UseG1GC"
     custom_plugin_urls: "https://dev.bukkit.org/projects/thizzyz-tree-feller/files/latest,https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsX-2.20.1.jar,https://download.luckperms.net/1573/bukkit/loader/LuckPerms-Bukkit-5.4.156.jar,https://github.com/MC-Machinations/PaperTweaks/releases/download/v0.5.0/PaperTweaks.jar"
