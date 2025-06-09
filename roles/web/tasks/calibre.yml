@@ -5,7 +5,7 @@
     - name: Create Calibre Docker network
       community.docker.docker_network:
         name: "{{ calibre_network }}"
-        internal: true
+        internal: false
 
     - name: Pull and run Calibre container
       community.docker.docker_container:
@@ -27,7 +27,7 @@
 
     - name: Pull and run Calibre Web container
       community.docker.docker_container:
-        name: calibre-web
+        name: "{{ calibre_web_container_name }}"
         pull: always
         image: lscr.io/linuxserver/calibre-web:latest
         restart_policy: unless-stopped
@@ -36,8 +36,8 @@
           PGID: "{{ service_users.calibre.gid }}"
           TZ: "{{ timezone }}"
           # The following variables allow this container to work with nginx-proxy and acme-companion
-          VIRTUAL_HOST: "{{ calibre_domain_name }}"
-          LETSENCRYPT_HOST: "{{ calibre_domain_name }}"
+          VIRTUAL_HOST: "{{ calibre_web_domain_name }}"
+          LETSENCRYPT_HOST: "{{ calibre_web_domain_name }}"
           VIRTUAL_PORT: "{{ calibre_web_port }}"
         ports:
           - "{{ calibre_web_port }}:8083/tcp"
