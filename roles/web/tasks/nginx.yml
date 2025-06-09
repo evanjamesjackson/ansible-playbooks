@@ -29,6 +29,7 @@
     dest: "/etc/nginx/vhost.d/{{ calibre_web_domain_name }}"
     force: true
     content: |
+      client_max_body_size 20G;
       # Adjust headers that work better with Kobo Sync
       proxy_pass_request_headers on;
       proxy_set_header Host $host;
