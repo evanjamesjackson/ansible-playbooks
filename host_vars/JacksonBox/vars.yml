@@ -60,11 +60,12 @@ nginx_network: "nginx_network"
 # Calibre
 calibre_port: "8084"
 calibre_web_port: "8083"
+calibre_domain_name: "calibre.jacksonnet.ca"
 calibre_library_dir: "/hdd/calibre-library"
 
 # ddclient
 domain_name: "jacksonnet.ca"
-ddclient_domains: "geysermc1,minecraft1,sonarr,radarr,nextcloud,vpn"
+ddclient_domains: "geysermc1,minecraft1,sonarr,radarr,nextcloud,vpn,calibre"
 ddclient_protocol: "namecheap"
 
 # Folding@home

@@ -1,51 +1,59 @@
-- name: Pull and run Calibre container
-  community.docker.docker_container:
-    name: calibre
-    pull: always
-    image: lscr.io/linuxserver/calibre:latest
-    restart_policy: unless-stopped
-    env:
-      PUID: "{{ service_users.calibre.uid }}"
-      PGID: "{{ service_users.calibre.gid }}"
-      TZ: "{{ timezone }}"
-    ports:
-      - "{{ calibre_port }}:8080/tcp"
-    volumes:
-      - calibre_config:/config
-      - "{{ calibre_library_dir }}:/library"
+- name: Configure Calibre
+  vars:
+    calibre_network: "calibre_internal_network"
+  block:
+    - name: Create Calibre Docker network
+      community.docker.docker_network:
+        name: "{{ calibre_network }}"
+        internal: true
 
-- name: Pull and run Calibre Web container
-  community.docker.docker_container:
-    name: calibre-web
-    pull: always
-    image: lscr.io/linuxserver/calibre-web:latest
-    restart_policy: unless-stopped
-    env:
-      PUID: "{{ service_users.calibre.uid }}"
-      PGID: "{{ service_users.calibre.gid }}"
-      TZ: "{{ timezone }}"
-    ports:
-      - "{{ calibre_web_port }}:8083/tcp"
-    volumes:
-      - calibre_web_config:/config
-      - "{{ calibre_library_dir }}:/library"
+    - name: Pull and run Calibre container
+      community.docker.docker_container:
+        name: calibre
+        pull: always
+        image: lscr.io/linuxserver/calibre:latest
+        restart_policy: unless-stopped
+        env:
+          PUID: "{{ service_users.calibre.uid }}"
+          PGID: "{{ service_users.calibre.gid }}"
+          TZ: "{{ timezone }}"
+        ports:
+          - "{{ calibre_port }}:8080/tcp"
+        volumes:
+          - calibre_config:/config
+          - "{{ calibre_library_dir }}:/library"
+        networks:
+          - name: "{{ calibre_network }}"
 
-- name: Open Calibre port in UFW
-  become: true
-  community.general.ufw:
-    port: "{{ calibre_port }}"
-    proto: tcp
-    rule: allow
-    direction: in
-    src: "{{ item }}"
-  loop: "{{ local_subnets }}"
+    - name: Pull and run Calibre Web container
+      community.docker.docker_container:
+        name: calibre-web
+        pull: always
+        image: lscr.io/linuxserver/calibre-web:latest
+        restart_policy: unless-stopped
+        env:
+          PUID: "{{ service_users.calibre.uid }}"
+          PGID: "{{ service_users.calibre.gid }}"
+          TZ: "{{ timezone }}"
+          # The following variables allow this container to work with nginx-proxy and acme-companion
+          VIRTUAL_HOST: "{{ calibre_domain_name }}"
+          LETSENCRYPT_HOST: "{{ calibre_domain_name }}"
+          VIRTUAL_PORT: "{{ calibre_web_port }}"
+        ports:
+          - "{{ calibre_web_port }}:8083/tcp"
+        volumes:
+          - calibre_web_config:/config
+          - "{{ calibre_library_dir }}:/library"
+        networks:
+          - name: "{{ calibre_network }}"
+          - name: "{{ nginx_network }}"
 
-- name: Open Calibre Web port in UFW
-  become: true
-  community.general.ufw:
-    port: "{{ calibre_web_port }}"
-    proto: tcp
-    rule: allow
-    direction: in
-    src: "{{ item }}"
-  loop: "{{ local_subnets }}"
+    - name: Open Calibre port in UFW
+      become: true
+      community.general.ufw:
+        port: "{{ calibre_port }}"
+        proto: tcp
+        rule: allow
+        direction: in
+        src: "{{ item }}"
+      loop: "{{ local_subnets }}"
