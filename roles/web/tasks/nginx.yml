@@ -4,25 +4,57 @@
     name: nginx
     state: stopped
 
-- name: Create nginx Docker network
+- name: Ensure /etc/nginx/vhost.d directory exists
+  become: true
+  ansible.builtin.file:
+    path: /etc/nginx/vhost.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Create custom NGINX conf file for Nextcloud
+  become: true
+  ansible.builtin.copy:
+    mode: 0644
+    dest: "/etc/nginx/vhost.d/{{ nextcloud_domain_name }}"
+    force: true
+    content: |
+      client_max_body_size 50G;
+
+- name: Create custom NGINX conf file for Calibre
+  become: true
+  ansible.builtin.copy:
+    mode: 0644
+    dest: "/etc/nginx/vhost.d/{{ calibre_web_domain_name }}"
+    force: true
+    content: |
+      # Adjust headers that work better with Kobo Sync
+      proxy_pass_request_headers on;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-Host $http_host;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $http_connection;
+      proxy_busy_buffers_size 512k;
+      proxy_buffers 4 512k;
+      proxy_buffer_size 256k;
+
+- name: Create NGINX Docker network
   community.docker.docker_network:
     name: "{{ nginx_network }}"
     internal: false
 
-- name: Create custom nginx conf file
-  become: true
-  ansible.builtin.copy:
-    mode: 0644
-    dest: /etc/nginx/conf.d/custom.conf
-    content: |
-      client_max_body_size 50G;
-
 - name: Pull and run nginx-proxy container
+  become: true
   community.docker.docker_container:
     name: nginx-proxy
     pull: always
     image: nginxproxy/nginx-proxy:1.7
     restart_policy: "always"
+    recreate: true
     networks:
       - name: "{{ nginx_network }}"
     ports:
@@ -31,9 +63,8 @@
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - nginx-certs:/etc/nginx/certs
-      - nginx-vhost:/etc/nginx/vhost.d
       - nginx-html:/usr/share/nginx/html
-      - /etc/nginx/conf.d/custom.conf:/etc/nginx/conf.d/custom.conf:ro
+      - /etc/nginx/vhost.d:/etc/nginx/vhost.d:ro
 
 - name: Pull and run nginx-proxy-acme-companion container
   community.docker.docker_container:
