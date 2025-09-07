@@ -65,6 +65,10 @@ debs:
     filename: "/tmp/protonvpn.deb"
     checksum: "sha256:62a9d849835de8a5664cf95329458bf1966780b15cec420bf707b5f7278b9027"
     package: protonvpn-stable-release
+  discord:
+    url: "https://discord.com/api/download?platform=linux&format=deb"
+    filename: "/tmp/discord.deb"
+    package: discord
 
 # Flatpaks
 flatpaks:
