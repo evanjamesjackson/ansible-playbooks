@@ -16,8 +16,8 @@
 - name: Configure Folding@home service
   ansible.builtin.include_tasks: folding@home.yml
 
-- name: Configure Nextcloud service
-  ansible.builtin.include_tasks: nextcloud.yml
+# - name: Configure Nextcloud service
+#   ansible.builtin.include_tasks: nextcloud.yml
 
 - name: Configure home theater services
   ansible.builtin.include_tasks: home_theater.yml

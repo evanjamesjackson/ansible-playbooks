@@ -17,7 +17,6 @@ apt_packages:
   - gnome-tweaks
   - libreoffice
   - make
-  - nextcloud-desktop
   - pavucontrol
   - qbittorrent
   - retroarch
@@ -69,6 +68,10 @@ debs:
     url: "https://discord.com/api/download?platform=linux&format=deb"
     filename: "/tmp/discord.deb"
     package: discord
+  filen:
+    url: "http://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_amd64.deb"
+    filename: "/tmp/filen.deb"
+    package: filen
 
 # Flatpaks
 flatpaks:
