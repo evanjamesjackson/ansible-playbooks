@@ -18,9 +18,6 @@
 
 - name: Install packages
   become: true
-  ansible.builtin.package:
-    state: present
-    name: "{{ combined_apt_packages }}"
   vars:
     default_apt_packages:
       - fish
@@ -30,6 +27,9 @@
       - tmux
       - vim
     combined_apt_packages: "{{ default_apt_packages + apt_packages }}"
+  ansible.builtin.package:
+    state: present
+    name: "{{ combined_apt_packages }}"
 
 - name: Gather package facts (for any future tasks that need package information)
   ansible.builtin.package_facts:
