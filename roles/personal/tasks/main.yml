@@ -12,14 +12,6 @@
     state: directory
     mode: 0755
 
-- name: Install .debs not available in APT
-  ansible.builtin.include_tasks: debs.yml
-  loop: "{{ debs | dict2items }}"
-  when: debs is defined
-
-- name: Configure Flatpak
-  ansible.builtin.include_tasks: flatpak.yml
-
 - name: Configure rogauracore
   ansible.builtin.include_tasks: rogauracore.yml
 

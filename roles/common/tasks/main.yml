@@ -25,6 +25,14 @@
   ansible.builtin.include_tasks: fish.yml
   when: "user_shell == '/usr/bin/fish'"
 
+- name: Install .debs not available in APT
+  ansible.builtin.include_tasks: debs.yml
+  loop: "{{ debs | dict2items }}"
+  when: debs is defined
+
+- name: Configure Flatpak
+  ansible.builtin.include_tasks: flatpak.yml
+
 # TODO unattended upgrades
 
 - name: Reboot if required
