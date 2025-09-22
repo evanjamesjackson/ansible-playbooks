@@ -1,8 +1,16 @@
+- name: Check if NGINX service exists
+  become: true
+  ansible.builtin.systemd:
+    name: nginx
+  register: nginx_service_status
+  failed_when: false
+
 - name: Stop default NGINX service (since we use a Docker container instead)
   become: true
   ansible.builtin.service:
     name: nginx
     state: stopped
+  when: nginx_service_status.status is defined and nginx_service_status.status.LoadState == "loaded"
 
 - name: Ensure /etc/nginx/vhost.d directory exists
   become: true
