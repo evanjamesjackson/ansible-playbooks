@@ -11,6 +11,14 @@ github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
 user_shell: /usr/bin/fish
 dotfiles_branch: server
 
+# .deb packages
+# .deb's
+debs:
+  filen:
+    url: "http://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_amd64.deb"
+    filename: "/tmp/filen.deb"
+    package: filen
+
 # No-login users for owning services
 service_users:
   calibre:
@@ -20,24 +28,24 @@ service_users:
     gid: 1005
   ddclient:
     name: "ddclient"
-    uid: 995
+    uid: 1006
     groups: "ddclient"
-    gid: 995
+    gid: 1006
   folding:
     name: "folding"
-    uid: 1001
+    uid: 1007
     groups: "folding"
-    gid: 1001
+    gid: 1007
   media:
     name: "media"
-    uid: 911
+    uid: 1008
     groups: "media"
-    gid: 911
+    gid: 1008
   minecraft:
     name: "minecraft"
-    uid: 996
+    uid: 1009
     groups: "minecraft"
-    gid: 996
+    gid: 1009
   netdata:
     name: "netdata"
     uid: 1004
