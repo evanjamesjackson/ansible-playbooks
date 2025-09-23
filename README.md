@@ -44,5 +44,8 @@ Run `./run.sh` to run all the playbooks. Optionally, pass the name of a playbook
 ## Notes
 
 - When first configuring Plex, do the following:
-  1.  Run `ssh -L 32400:localhost:32400 JacksonBox` to open a tunnel from the server to your machine
+  1.  Run `ssh -L 32400:localhost:32400 <web server SSH alias>` to open a tunnel from the server to your machine
   2.  Go to http://localhost:32400/web in a browser and sign in to Plex, and complete the given steps.
+  3.  Go to Settings -> <media server name> -> Settings -> Remote Access and click "Enable Remote Access"
+- When first configuring qBitorrent, find the default credentials by running `docker logs qbittorrent` on the web server.
+- The default credentials for a new Calibre Web installation are username `admin` and password `admin123`.
