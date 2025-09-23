@@ -18,6 +18,7 @@
       dynamic_dns_password: DYNAMIC-DNS-SERVICE-PASSWORD-HERE
       nextcloud_db_password: NEXTCLOUD-DB-PASSWORD-HERE
       nextcloud_admin_password: NEXTCLOUD-ADMIN-PASSWORD-HERE
+      plex_claim: Plex claim code (https://account.plex.tv/claim)
       ```
 
    3. In `host_vars/EvanAsus/secret.yml` add the following:
@@ -39,3 +40,9 @@
 ## Running
 
 Run `./run.sh` to run all the playbooks. Optionally, pass the name of a playbook (without its extension) to just run that playbook (e.g. `./run.sh personal`).
+
+## Notes
+
+- When first configuring Plex, do the following:
+  1.  Run `ssh -L 32400:localhost:32400 JacksonBox` to open a tunnel from the server to your machine
+  2.  Go to http://localhost:32400/web in a browser and sign in to Plex, and complete the given steps.

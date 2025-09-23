@@ -23,6 +23,7 @@
       NGINX_PROXY_NETWORK="{{ nginx_network }}"
       SONARR_HOSTNAME="{{ sonarr_domain_name }}"
       RADARR_HOSTNAME="{{ radarr_domain_name }}"
+      PLEX_CLAIM="{{ plex_claim }}"
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0755
