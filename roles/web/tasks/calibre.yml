@@ -18,7 +18,8 @@
           PGID: "{{ service_users.calibre.gid }}"
           TZ: "{{ timezone }}"
         ports:
-          - "{{ calibre_port }}:8080/tcp"
+          - "{{ calibre_http_port }}:8080/tcp"
+          - "{{ calibre_https_port }}:8181/tcp"
         volumes:
           - calibre_config:/config
           - "{{ calibre_library_dir }}:/library"
@@ -27,7 +28,7 @@
 
     - name: Pull and run Calibre Web container
       community.docker.docker_container:
-        name: "{{ calibre_web_container_name }}"
+        name: calibre-web
         pull: always
         image: lscr.io/linuxserver/calibre-web:latest
         restart_policy: unless-stopped
@@ -38,7 +39,7 @@
           # The following variables allow this container to work with nginx-proxy and acme-companion
           VIRTUAL_HOST: "{{ calibre_web_domain_name }}"
           LETSENCRYPT_HOST: "{{ calibre_web_domain_name }}"
-          VIRTUAL_PORT: "{{ calibre_web_port }}"
+          VIRTUAL_PORT: "8083"
         ports:
           - "{{ calibre_web_port }}:8083/tcp"
         volumes:
@@ -48,10 +49,30 @@
           - name: "{{ calibre_network }}"
           - name: "{{ nginx_network }}"
 
-    - name: Open Calibre port in UFW
+    - name: Open Calibre HTTP port in UFW
       become: true
       community.general.ufw:
-        port: "{{ calibre_port }}"
+        port: "{{ calibre_http_port }}"
+        proto: tcp
+        rule: allow
+        direction: in
+        src: "{{ item }}"
+      loop: "{{ local_subnets }}"
+
+    - name: Open Calibre HTTPs port in UFW
+      become: true
+      community.general.ufw:
+        port: "{{ calibre_https_port }}"
+        proto: tcp
+        rule: allow
+        direction: in
+        src: "{{ item }}"
+      loop: "{{ local_subnets }}"
+
+    - name: Open Calibre web port in UFW
+      become: true
+      community.general.ufw:
+        port: "{{ calibre_web_port }}"
         proto: tcp
         rule: allow
         direction: in

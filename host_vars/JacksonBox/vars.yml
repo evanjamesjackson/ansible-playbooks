@@ -8,7 +8,7 @@ trigger_reboots: true
 username: ejackson
 home_directory: "/home/ejackson"
 github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
-user_shell: /usr/bin/fish
+user_shell: "/usr/bin/fish"
 dotfiles_branch: server
 
 # .deb packages
@@ -66,9 +66,9 @@ service_users:
 nginx_network: "nginx_network"
 
 # Calibre
-calibre_port: "8084"
+calibre_http_port: "8081"
+calibre_https_port: "8181"
 calibre_web_port: "8083"
-calibre_web_container_name: "calibre-web"
 calibre_web_domain_name: "calibre.jacksonnet.ca"
 calibre_library_dir: "/hdd/calibre-library"
 
