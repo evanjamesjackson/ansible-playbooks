@@ -17,6 +17,8 @@
       PGID="{{ service_users.media.gid }}"
       MEDIA_ROOT="{{ media_data_dir }}"
       PLEX_PORT="{{ plex_port }}"
+      SONARR_PORT="{{ sonarr_port }}"
+      RADARR_PORT="{{ radarr_port }}"
       BAZARR_PORT="{{ bazarr_port }}"
       PROWLARR_PORT="{{ prowlarr_port }}"
       QBITTORRENT_PORT="{{ qbittorrent_port }}"
@@ -46,6 +48,20 @@
   become: yes
   community.general.ufw:
     port: "{{ plex_port }}"
+    proto: tcp
+    rule: allow
+
+- name: Open Sonarr port
+  become: yes
+  community.general.ufw:
+    port: "{{ sonarr_port }}"
+    proto: tcp
+    rule: allow
+
+- name: Open Radarr port
+  become: yes
+  community.general.ufw:
+    port: "{{ radarr_port }}"
     proto: tcp
     rule: allow
 
