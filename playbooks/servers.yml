@@ -2,4 +2,4 @@
   ansible.builtin.import_playbook: web.yml
 
 - name: Run Pi-hole servers playbook
-  ansible.builtin.import_playbook: pi_hole.yml
+  ansible.builtin.import_playbook: pi-hole.yml

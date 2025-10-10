@@ -1,8 +1,8 @@
 - name: Configure Pi-hole servers
-  hosts: pi_hole
+  hosts: pi-hole
   become: true
   roles:
     - role: common
     - role: server
       become: true # required here for geerlingguy.docker
-    - role: pi_hole
+    - role: pi-hole

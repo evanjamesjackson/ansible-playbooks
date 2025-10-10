@@ -14,7 +14,7 @@
 - name: Start Pi-hole Docker container
   community.docker.docker_container:
     name: pihole
-    image: cbcrowe/pihole-unbound
+    image: mpgirro/pihole-unbound
     restart_policy: unless-stopped
     hostname: "{{ hostname }}"
     domainname: "{{ hostname }}.local"
@@ -25,7 +25,6 @@
       FTLCONF_LOCAL_IPV4: "{{ local_ip.stdout }}"
       TZ: "{{ timezone }}"
       # Web admin
-      WEB_PORT: "81"
       WEBPASSWORD: "pihole"
       # DNS
       PIHOLE_DNS_: "127.0.0.1#5335"
@@ -40,7 +39,7 @@
   community.general.ufw:
     rule: allow
     direction: in
-    port: "81"
+    port: "80"
     proto: tcp
     src: "{{ item }}"
   loop: "{{ local_subnets }}"
