@@ -39,7 +39,7 @@
 
 ## Running
 
-Run `./run.sh` to run all the playbooks. Optionally, pass the name of a playbook (without its extension) to just run that playbook (e.g. `./run.sh personal`).
+Run `./run.sh` to run all the playbooks. Optionally, pass the path of one or more playbooks to run those playbooks (e.g. `./run.sh ./playbooks/web.yml ./playbooks/personal.yml`).
 
 ## Notes
 

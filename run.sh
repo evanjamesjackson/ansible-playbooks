@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ -z $1 ]
+if [ -n $1 ]
 then
-    ansible-playbook --verbose --ask-vault-pass site.yml
+	ansible-playbook --verbose --ask-vault-pass "$@"
 else
-    ansible-playbook --verbose --ask-vault-pass playbooks/$1.yml
+    ansible-playbook --verbose --ask-vault-pass site.yml
 fi
