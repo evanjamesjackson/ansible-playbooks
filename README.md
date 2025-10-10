@@ -16,8 +16,6 @@
       ```
       password: YOUR-USERS-PASSWORD-HERE
       dynamic_dns_password: DYNAMIC-DNS-SERVICE-PASSWORD-HERE
-      nextcloud_db_password: NEXTCLOUD-DB-PASSWORD-HERE
-      nextcloud_admin_password: NEXTCLOUD-ADMIN-PASSWORD-HERE
       plex_claim: Plex claim code (https://account.plex.tv/claim)
       ```
 
