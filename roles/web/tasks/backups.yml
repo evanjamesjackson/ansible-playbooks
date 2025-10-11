@@ -1,0 +1,39 @@
+- name: Clone backups repository
+  become: true
+  become_user: "{{ username }}"
+  ansible.builtin.git:
+    repo: git@github.com:evanjamesjackson/backups.git
+    key_file: "{{ github_key_file }}"
+    dest: "{{ backups_repo_dest }}"
+    version: main
+
+- name: Create .env file
+  ansible.builtin.copy:
+    dest: "{{ home_theater_repo_dest }}/.env"
+    force: true
+    content: |
+      FILEN_BACKUPS_PATH="{{ filen_backups_path }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+
+- name: Start services via Docker Compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ backups_repo_dest }}"
+    project_name: "backups"
+    pull: always
+    recreate: always
+
+- name: Create cron job to run daily backups
+  become: true
+  ansible.builtin.cron:
+    name: "Daily backup"
+    special_time: daily
+    job: "cd {{ backups_repo_dest }} && docker compose run --rm backups ./backup.sh"
+
+- name: Create cron job to run daily backup cleanup
+  become: true
+  ansible.builtin.cron:
+    name: "Daily backup cleanup"
+    special_time: daily
+    job: "cd {{ backups_repo_dest }} && docker compose run --rm backups ./cleanup.sh"

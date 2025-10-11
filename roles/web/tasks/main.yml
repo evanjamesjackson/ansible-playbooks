@@ -28,3 +28,6 @@
 
 - name: Configure Calibre service
   ansible.builtin.include_tasks: calibre.yml
+
+- name: Configure backups
+  ansible.builtin.include_tasks: backups.yml
