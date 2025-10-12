@@ -17,23 +17,16 @@
     group: "{{ username }}"
     mode: 0755
 
-- name: Start services via Docker Compose
-  community.docker.docker_compose_v2:
-    project_src: "{{ backups_repo_dest }}"
-    project_name: "backups"
-    pull: always
-    recreate: always
-
 - name: Create cron job to run daily backups
   become: true
   ansible.builtin.cron:
     name: "Daily backup"
     special_time: daily
-    job: "cd {{ backups_repo_dest }} && docker compose run --rm backups ./backup.sh"
+    job: "cd {{ backups_repo_dest }} && docker compose run --build --rm backups ./backup.sh"
 
 - name: Create cron job to run daily backup cleanup
   become: true
   ansible.builtin.cron:
     name: "Daily backup cleanup"
     special_time: daily
-    job: "cd {{ backups_repo_dest }} && docker compose run --rm backups ./cleanup.sh"
+    job: "cd {{ backups_repo_dest }} && docker compose run --build --rm backups ./cleanup.sh"
