@@ -3,6 +3,11 @@
   ansible.builtin.hostname:
     name: "{{ hostname }}"
 
+- name: Set timezone
+  become: true
+  community.general.timezone:
+    name: "{{ timezone }}"
+
 - name: Run package-related tasks
   ansible.builtin.include_tasks: apt.yml
 
