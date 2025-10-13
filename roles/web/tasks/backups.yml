@@ -13,6 +13,7 @@
     force: true
     content: |
       FILEN_BACKUPS_PATH="{{ filen_backups_path }}"
+      HOME_DIRECTORY="{{ home_directory }}"
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0755
