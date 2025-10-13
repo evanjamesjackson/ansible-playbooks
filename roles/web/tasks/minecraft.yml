@@ -45,6 +45,7 @@
   community.docker.docker_compose_v2:
     project_src: "{{ item.value.directory }}"
     pull: always
+    recreate: always
 
 - name: Open Java port
   become: yes
