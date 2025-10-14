@@ -9,3 +9,11 @@ home_directory: "/home/ejackson"
 github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
 user_shell: /usr/bin/fish
 dotfiles_branch: server
+
+# No-login users for owning services
+service_users:
+  netdata:
+    name: "netdata"
+    uid: 1004
+    groups: "netdata"
+    gid: 1004

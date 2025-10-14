@@ -1,0 +1,5 @@
+- name: Configure folding@home machines
+  hosts: web
+  roles:
+    - role: common
+    - role: folding@home

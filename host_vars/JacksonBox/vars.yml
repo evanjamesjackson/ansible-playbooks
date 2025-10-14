@@ -77,9 +77,6 @@ domain_name: "jacksonnet.ca"
 ddclient_domains: "geysermc1,minecraft1,sonarr,radarr,nextcloud,vpn,calibre"
 ddclient_protocol: "namecheap"
 
-# Folding@home
-foldingathome_port: "7396"
-
 # Nextcloud
 nextcloud_domain_name: "nextcloud.jacksonnet.ca"
 nextcloud_data_dir: "/hdd/nextcloud/app/data"
@@ -100,9 +97,6 @@ sonarr_domain_name: "sonarr.jacksonnet.ca"
 vpn_domain_name: "vpn.jacksonnet.ca"
 wireguard_port: "51820"
 wireguard_webui_port: "51821"
-
-# Netdata
-netdata_port: "19999"
 
 # Minecraft
 minecraft_servers:

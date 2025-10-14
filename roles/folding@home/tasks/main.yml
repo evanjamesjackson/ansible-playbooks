@@ -14,8 +14,15 @@
     volumes:
       - foldingathome_config:/config
 
+- name: Check whether ufw status is active
+  ansible.builtin.command: ufw status
+  become: true
+  changed_when: false
+  register: ufw_check
+
 - name: Open Folding@home port in UFW
   become: true
+  when: "'inactive' not in ufw_check.stdout"
   community.general.ufw:
     port: "{{ foldingathome_port }}"
     proto: tcp

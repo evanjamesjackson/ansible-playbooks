@@ -302,3 +302,11 @@ fonts:
 # rogauracore
 rogauracore_cmd: "rogauracore rainbow_cycle 1; rogauracore brightness 1"
 rogauracore_version: "1.6"
+
+# No-login users for owning services
+service_users:
+  folding:
+    name: "folding"
+    uid: 1007
+    groups: "folding"
+    gid: 1007

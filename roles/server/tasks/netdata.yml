@@ -4,14 +4,15 @@
     pull: always
     image: netdata/netdata:latest
     restart_policy: unless-stopped
+    recreate: true
     ports:
       - "{{ netdata_port }}:19999/tcp"
     capabilities:
       - SYS_PTRACE
     security_opts:
       - apparmor:unconfined
+    hostname: "{{ hostname }}"
     env:
-      NETDATA_DISABLE_CLOUD: "1"
       TZ: "{{ timezone }}"
     volumes:
       - netdataconfig:/etc/netdata
