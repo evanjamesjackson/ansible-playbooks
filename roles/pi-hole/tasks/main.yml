@@ -13,7 +13,7 @@
 
 - name: Start Pi-hole Docker container
   community.docker.docker_container:
-    name: pihole
+    name: pi-hole
     image: mpgirro/pihole-unbound
     restart_policy: unless-stopped
     hostname: "{{ hostname }}"
