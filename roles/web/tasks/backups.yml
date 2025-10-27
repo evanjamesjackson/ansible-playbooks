@@ -9,7 +9,7 @@
 
 - name: Create .env file
   ansible.builtin.copy:
-    dest: "{{ home_theater_repo_dest }}/.env"
+    dest: "{{ backups_repo_dest }}/.env"
     force: true
     content: |
       FILEN_BACKUPS_PATH="{{ filen_backups_path }}"
