@@ -42,7 +42,6 @@
     project_src: "{{ home_theater_repo_dest }}"
     project_name: "home-theater"
     pull: always
-    recreate: always
 
 - name: Open Plex port
   become: yes

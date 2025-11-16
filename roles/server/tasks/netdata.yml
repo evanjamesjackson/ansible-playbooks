@@ -4,7 +4,6 @@
     pull: always
     image: netdata/netdata:latest
     restart_policy: unless-stopped
-    recreate: true
     ports:
       - "{{ netdata_port }}:19999/tcp"
     capabilities:

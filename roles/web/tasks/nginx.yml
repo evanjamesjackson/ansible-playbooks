@@ -63,7 +63,6 @@
     pull: always
     image: nginxproxy/nginx-proxy:1.7
     restart_policy: "always"
-    recreate: true
     networks:
       - name: "{{ nginx_network }}"
     ports:
