@@ -37,7 +37,7 @@
 
 ## Running
 
-Run `./run.sh` to run all the playbooks. Optionally, pass the path of one or more playbooks to run those playbooks (e.g. `./run.sh ./playbooks/web.yml ./playbooks/personal.yml`).
+On first run, use `ansible-playbook -K --ask-vault-pass playbooks/<playbook name>.yml` to run a playbook. After passwordless-sudo is configured on the first run, you can omit the `-K`.
 
 ## Notes
 
