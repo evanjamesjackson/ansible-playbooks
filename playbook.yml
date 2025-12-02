@@ -16,7 +16,7 @@
 
 - hosts: pi_hole
   roles:
-    - pi-hole
+    - pi_hole
 
 - hosts: folding
   roles:
