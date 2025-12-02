@@ -1,7 +1,0 @@
-- name: Configure Pi-hole servers
-  hosts: pi-hole
-  become: true
-  roles:
-    - role: common
-    - role: server
-    - role: pi-hole

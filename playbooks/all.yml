@@ -1,5 +1,0 @@
-- name: Run personal playbook
-  ansible.builtin.import_playbook: personal.yml
-
-- name: Run servers playbook
-  ansible.builtin.import_playbook: servers.yml

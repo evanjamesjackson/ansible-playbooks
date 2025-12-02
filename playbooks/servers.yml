@@ -1,5 +1,0 @@
-- name: Run web servers playbook
-  ansible.builtin.import_playbook: web.yml
-
-- name: Run Pi-hole servers playbook
-  ansible.builtin.import_playbook: pi-hole.yml

@@ -1,6 +1,0 @@
-- name: Configure web servers
-  hosts: web
-  roles:
-    - role: common
-    - role: server
-    - role: web

@@ -1,0 +1,23 @@
+- hosts: all
+  roles:
+    - common
+    
+- hosts: personal
+  roles:
+    - personal
+
+- hosts: servers
+  roles: 
+    - server
+
+- hosts: web
+  roles: 
+    - web
+
+- hosts: pi_hole
+  roles:
+    - pi-hole
+
+- hosts: folding
+  roles:
+    - folding@home
