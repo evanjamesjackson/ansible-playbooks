@@ -21,6 +21,7 @@
   vars:
     default_apt_packages:
       - fish
+      - htop
       - software-properties-common
       - speedtest-cli
       - stow
