@@ -24,5 +24,8 @@
 - name: Configure GNOME
   ansible.builtin.include_tasks: gnome.yml
 
+- name: Configure NVIDIA
+  ansible.builtin.include_tasks: display.yml
+
 - name: Configure fonts
   ansible.builtin.include_tasks: fonts.yml

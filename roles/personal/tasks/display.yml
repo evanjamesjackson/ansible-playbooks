@@ -1,0 +1,14 @@
+- name: Configure X11 file for NVIDIA
+  become: true
+  ansible.builtin.copy:
+    dest: "/etc/X11/xorg.conf.d/20-nvidia-vsync.conf"
+    content: |
+      Section "Device"
+          Identifier "NVIDIA Device"
+          Driver "nvidia"
+          # This *seems* to force VSync
+          Option "ForceFullCompositionPipeline" "on"
+          Option "ForceCompositionPipeline" "on"
+          Option "TripleBuffer" "true"
+      EndSection
+    mode: 0644
