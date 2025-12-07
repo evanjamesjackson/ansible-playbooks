@@ -1,6 +1,3 @@
-- name: Configure WoeUSB
-  ansible.builtin.include_tasks: woeusb.yml
-
 - name: Configure autostart applications
   ansible.builtin.include_tasks: autostart.yml
 
@@ -9,3 +6,6 @@
 
 - name: Configure fonts
   ansible.builtin.include_tasks: fonts.yml
+
+- name: Configure WoeUSB
+  ansible.builtin.include_tasks: woeusb.yml
