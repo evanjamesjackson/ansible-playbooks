@@ -162,7 +162,7 @@ dconf_entries:
     value: "'lodpi'"
   wallpaper:
     key: "/org/gnome/desktop/background/picture-uri-dark"
-    value: "'file:///home/ejackson/Cloud/Pictures & Videos/Animals/Wild/IMG_2987.JPG'"
+    value: "'file:///{{ home_directory }}/Cloud/Pictures & Videos/Animals/Wild/IMG_2987.JPG'"
 
   # Theme
   color_scheme:
