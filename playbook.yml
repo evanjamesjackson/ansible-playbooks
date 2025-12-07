@@ -1,17 +1,21 @@
 - hosts: all
   roles:
     - common
-    
+
 - hosts: personal
   roles:
     - personal
 
+- hosts: zephyrus
+  roles:
+    - zephyrus
+
 - hosts: servers
-  roles: 
+  roles:
     - server
 
 - hosts: web
-  roles: 
+  roles:
     - web
 
 - hosts: pi_hole

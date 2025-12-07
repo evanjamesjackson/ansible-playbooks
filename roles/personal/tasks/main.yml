@@ -1,19 +1,8 @@
-- name: Ignore laptop lid close
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/systemd/logind.conf
-    regexp: "^HandleLidSwitch="
-    insertafter: "^#HandleLidSwitch="
-    line: "HandleLidSwitch=ignore"
-
 - name: Ensure autostart directory exists
   ansible.builtin.file:
     path: "{{ home_directory }}/.config/autostart"
     state: directory
     mode: 0755
-
-- name: Configure rogauracore
-  ansible.builtin.include_tasks: rogauracore.yml
 
 - name: Configure WoeUSB
   ansible.builtin.include_tasks: woeusb.yml
@@ -23,9 +12,6 @@
 
 - name: Configure GNOME
   ansible.builtin.include_tasks: gnome.yml
-
-- name: Configure NVIDIA
-  ansible.builtin.include_tasks: display.yml
 
 - name: Configure fonts
   ansible.builtin.include_tasks: fonts.yml

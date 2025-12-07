@@ -1,0 +1,13 @@
+- name: Ignore laptop lid close
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    regexp: "^HandleLidSwitch="
+    insertafter: "^#HandleLidSwitch="
+    line: "HandleLidSwitch=ignore"
+
+- name: Configure rogauracore
+  ansible.builtin.include_tasks: rogauracore.yml
+
+- name: Configure NVIDIA
+  ansible.builtin.include_tasks: nvidia.yml
