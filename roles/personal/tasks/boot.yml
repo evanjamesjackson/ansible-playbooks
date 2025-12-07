@@ -1,0 +1,5 @@
+- name: Configure systemd-boot timeout
+  become: true
+  ansible.builtin.lineinfile:
+    path: /boot/efi/loader/loader.conf
+    line: timeout 15
