@@ -17,6 +17,7 @@ apt_packages:
   - gnome-tweaks
   - libreoffice
   - make
+  - nautilus
   - pavucontrol
   - qbittorrent
   - retroarch
@@ -122,36 +123,7 @@ dconf_entries:
   maps_caps_lock_to_ctrl:
     key: "/org/gnome/desktop/input-sources/xkb-options"
     value: "['caps:ctrl_modifier']"
-  home_directory_shortcut:
-    key: "/org/gnome/desktop/interface/home"
-    value: "['<Super>e']"
-  volume_up_shortcut:
-    key: "/org/gnome/desktop/interface/volume-up"
-    value: "['<Primary>Up']"
-  volume_down_shortcut:
-    key: "/org/gnome/desktop/interface/volume-down"
-    value: "['<Primary>Down']"
-  custom_shortcuts_list:
-    key: "/org/gnome/desktop/interface/custom-keybindings"
-    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
-  plex_shortcut_name:
-    key: "/org/gnome/desktop/interface/custom-keybindings/custom0/name"
-    value: "'Launch Plex'"
-  plex_shortcut_binding:
-    key: "/org/gnome/desktop/interface/custom-keybindings/custom0/binding"
-    value: "'<Primary><Alt>p'"
-  plex_shortcut_command:
-    key: "/org/gnome/desktop/interface/custom-keybindings/custom0/command"
-    value: "'flatpak run tv.plex.PlexDesktop'"
-  terminal_shortcut_name:
-    key: "/org/gnome/desktop/interface/custom-keybindings/custom1/name"
-    value: "'Launch Terminal'"
-  terminal_shortcut_binding:
-    key: "/org/gnome/desktop/interface/custom-keybindings/custom1/binding"
-    value: "'<Primary><Alt>t'"
-  terminal_shortcut_command:
-    key: "/org/gnome/desktop/interface/custom-keybindings/custom1/command"
-    value: "'gnome-terminal'"
+  # TODO launcher shortcuts
 
   # Display
   disable_hidpi:
@@ -195,7 +167,7 @@ dconf_entries:
     value: "false"
   define_enabled_extensions:
     key: "/org/gnome/shell/enabled-extensions"
-    value: "['pop-cosmic@system76.com', 'pop-shell@system76.com', 'system76-power@system76.com', 'ubuntu-appindicators@ubuntu.com', 'cosmic-dock@system76.com', 'cosmic-workspaces@system76.com', 'popx11gestures@system76.com', 'unredirect@vaina.lt', 'user-theme@gnome-shell-extensions.gcampax.github.com']"
+    value: "['pop-cosmic@system76.com', 'pop-shell@system76.com', 'system76-power@system76.com', 'ubuntu-appindicators@ubuntu.com', 'cosmic-dock@system76.com', 'cosmic-workspaces@system76.com', 'popx11gestures@system76.com', 'unredirect@vaina.lt', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'trayIconsReloaded@selfmade.pl']"
   docked_apps:
     key: "/org/gnome/shell/favorite-apps"
     value: "['org.gnome.Terminal.desktop', 'io.gitlab.librewolf-community.desktop', 'tv.plex.PlexDesktop.desktop', 'steam.desktop', 'Retroarch.desktop', 'com.spotify.Client.desktop']"
