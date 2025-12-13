@@ -8,9 +8,7 @@
   ansible.builtin.user:
     name: "{{ username }}"
     group: "{{ username }}"
-    password: "{{ password | password_hash('sha512') }}"
     shell: "{{ user_shell }}"
-    update_password: on_create
 
 - name: Suppress login message (hushlogin) for user
   ansible.builtin.file:
