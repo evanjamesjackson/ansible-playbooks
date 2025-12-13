@@ -1,0 +1,327 @@
+# System vars
+hostname: EvanDesktop
+timezone: "America/Toronto"
+
+# APT vars
+apt_repositories:
+  - "ppa:libretro/stable"
+apt_packages:
+  - audacity
+  - ca-certificates
+  - calibre
+  - curl
+  - dbus-x11
+  - eog-plugins
+  - gnupg
+  - gnome-screenshot
+  - gnome-tweaks
+  - libreoffice
+  - make
+  - pavucontrol
+  - qbittorrent
+  - retroarch
+  - rpi-imager
+  - solaar
+  - steam
+  - wget
+  - vim
+  - vlc
+
+# User-level vars
+username: ejackson
+home_directory: "/home/ejackson"
+user_shell: /usr/bin/fish
+ssh_key_file: "/home/ejackson/.ssh/id_ed25519"
+github_key_file: "/home/ejackson/.ssh/id_github_ed25519"
+dotfiles_branch: personal
+
+# SSH config hosts
+ssh_config_hosts:
+  JacksonBox:
+    host: "{{ hostvars['JacksonBox']['hostname'] }}"
+    hostname: "{{ hostvars['JacksonBox']['domain'] }}"
+  RasperryPi:
+    host: "{{ hostvars['RaspberryPi']['hostname'] }}"
+    hostname: "{{ hostvars['RaspberryPi']['domain'] }}"
+
+# .deb's
+debs:
+  vscode:
+    url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+    filename: "/tmp/vscode.deb"
+    package: "code"
+  wireguird:
+    url: "https://github.com/UnnoTed/wireguird/releases/download/v1.1.0/wireguird_amd64.deb"
+    filename: "/tmp/wireguird.deb"
+    package: "wireguird"
+  minecraft:
+    url: "https://launcher.mojang.com/download/Minecraft.deb"
+    filename: "/tmp/minecraft.deb"
+    package: "minecraft-launcher"
+  discord:
+    url: "https://discord.com/api/download?platform=linux&format=deb"
+    filename: "/tmp/discord.deb"
+    package: discord
+  filen:
+    url: "http://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_amd64.deb"
+    filename: "/tmp/filen.deb"
+    package: filen
+  # TODO protonvpn requires a different process
+
+# Flatpaks
+flatpaks:
+  - io.gitlab.librewolf-community
+  - tv.plex.PlexDesktop
+  - com.spotify.Client
+  - com.github.tchx84.Flatseal
+  - org.DolphinEmu.dolphin-emu
+  - net.pcsx2.PCSX2
+  - com.brave.Browser
+
+# Autostart
+autostart_configs:
+  protonvpn:
+    filename: "protonvpn.desktop"
+    script: |
+      #!/usr/bin/env xdg-open 
+      [Desktop Entry] 
+      Type=Application
+      Name=protonvpn
+      Exec=bash -c "protonvpn-app"
+      StartupNotify=false
+      Terminal=false
+  filen:
+    filename: "filen.desktop"
+    script: |
+      #!/usr/bin/env xdg-open 
+      [Desktop Entry] 
+      Type=Application
+      Name=filen
+      Exec=bash -c "/usr/bin/@filendesktop"
+      StartupNotify=false
+      Terminal=false
+
+# GNOME
+dconf_entries:
+  # Keyboard shortcuts/mappings
+  maximize_shortcut:
+    key: "/org/gnome/desktop/wm/keybindings/maximize"
+    value: "['<Super>Up']"
+  show_desktop_shortcut:
+    key: "/org/gnome/desktop/wm/keybindings/show-desktop"
+    value: "['<Super>d']"
+  switch_windows_shortcut:
+    key: "/org/gnome/desktop/wm/keybindings/switch-windows"
+    value: "['<Alt>Tab']"
+  snap_window_left:
+    key: "/org/gnome/mutter/keybindings/toggle-tiled-left"
+    value: "['<Super>Left']"
+  snap_window_right:
+    key: "/org/gnome/mutter/keybindings/toggle-tiled-right"
+    value: "['<Super>Right']"
+  maps_caps_lock_to_ctrl:
+    key: "/org/gnome/desktop/input-sources/xkb-options"
+    value: "['caps:ctrl_modifier']"
+  home_directory_shortcut:
+    key: "/org/gnome/desktop/interface/home"
+    value: "['<Super>e']"
+  volume_up_shortcut:
+    key: "/org/gnome/desktop/interface/volume-up"
+    value: "['<Primary>Up']"
+  volume_down_shortcut:
+    key: "/org/gnome/desktop/interface/volume-down"
+    value: "['<Primary>Down']"
+  custom_shortcuts_list:
+    key: "/org/gnome/desktop/interface/custom-keybindings"
+    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
+  plex_shortcut_name:
+    key: "/org/gnome/desktop/interface/custom-keybindings/custom0/name"
+    value: "'Launch Plex'"
+  plex_shortcut_binding:
+    key: "/org/gnome/desktop/interface/custom-keybindings/custom0/binding"
+    value: "'<Primary><Alt>p'"
+  plex_shortcut_command:
+    key: "/org/gnome/desktop/interface/custom-keybindings/custom0/command"
+    value: "'flatpak run tv.plex.PlexDesktop'"
+  terminal_shortcut_name:
+    key: "/org/gnome/desktop/interface/custom-keybindings/custom1/name"
+    value: "'Launch Terminal'"
+  terminal_shortcut_binding:
+    key: "/org/gnome/desktop/interface/custom-keybindings/custom1/binding"
+    value: "'<Primary><Alt>t'"
+  terminal_shortcut_command:
+    key: "/org/gnome/desktop/interface/custom-keybindings/custom1/command"
+    value: "'gnome-terminal'"
+
+  # Display
+  disable_hidpi:
+    key: "/com/system76/hidpi/enable"
+    value: "false"
+  enable_lodpi_mode:
+    key: "/com/system76/hidpi/mode"
+    value: "'lodpi'"
+  wallpaper:
+    key: "/org/gnome/desktop/background/picture-uri-dark"
+    value: "'file:///{{ home_directory }}/Cloud/Pictures & Videos/Animals/Wild/IMG_2987.JPG'"
+
+  # Theme
+  color_scheme:
+    key: "/org/gnome/desktop/interface/color-scheme"
+    value: "'prefer-dark'"
+  font_antialiasing:
+    key: "/org/gnome/desktop/interface/font-antialiasing"
+    value: "'grayscale'"
+  font_hinting:
+    key: "/org/gnome/desktop/interface/font-hinting"
+    value: "'slight'"
+  icon_theme:
+    key: "/org/gnome/desktop/interface/icon-theme"
+    value: "'Adwaita'"
+  user_theme:
+    key: "/org/gnome/shell/extensions/user-theme/name"
+    value: "'Pop-dark'"
+
+  # Power settings
+  ac_sleep_setting:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
+    value: "'nothing'"
+  battery_sleep_setting:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type"
+    value: "'nothing'"
+
+  # GNOME shell settings
+  enable_user_extensions:
+    key: "/org/gnome/shell/disable-user-extensions"
+    value: "false"
+  define_enabled_extensions:
+    key: "/org/gnome/shell/enabled-extensions"
+    value: "['pop-cosmic@system76.com', 'pop-shell@system76.com', 'system76-power@system76.com', 'ubuntu-appindicators@ubuntu.com', 'cosmic-dock@system76.com', 'cosmic-workspaces@system76.com', 'popx11gestures@system76.com', 'unredirect@vaina.lt', 'user-theme@gnome-shell-extensions.gcampax.github.com']"
+  docked_apps:
+    key: "/org/gnome/shell/favorite-apps"
+    value: "['org.gnome.Terminal.desktop', 'io.gitlab.librewolf-community.desktop', 'tv.plex.PlexDesktop.desktop', 'steam.desktop', 'Retroarch.desktop', 'com.spotify.Client.desktop']"
+  hide_applications_button:
+    key: "/org/gnome/shell/extensions/pop-cosmic/show-applications-button"
+    value: "false"
+  hide_workspaces_button:
+    key: "/org/gnome/shell/extensions/pop-cosmic/show-workspaces-button"
+    value: "false"
+
+  # Date and time
+  automatic_timezone:
+    key: "/org/gnome/desktop/datetime/automatic-timezone"
+    value: "true"
+  show_date:
+    key: "/org/gnome/desktop/interface/clock-show-date"
+    value: "true"
+  clock_format:
+    key: "/org/gnome/desktop/interface/clock-format"
+    value: "'12h'"
+
+  # Device behavior
+  automount:
+    key: "/org/gnome/desktop/media-handling/automount"
+    value: "false"
+  disable_natural_scroll:
+    key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
+    value: "false"
+  enable_two_finger_scrolling:
+    key: "/org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled"
+    value: "true"
+
+gnome_terminal_prefs: |
+  [/]
+  default='8481259a-b760-4d77-a61e-9d0d255732ce'
+  list=['8481259a-b760-4d77-a61e-9d0d255732ce']
+
+  [:8481259a-b760-4d77-a61e-9d0d255732ce]
+  audible-bell=false
+  background-color='#2E3440'
+  background-transparency-percent=15
+  bold-color='#D8DEE9'
+  bold-color-same-as-fg=true
+  cursor-background-color='rgb(216,222,233)'
+  cursor-colors-set=true
+  cursor-foreground-color='rgb(59,66,82)'
+  custom-command='/usr/bin/fish'
+  font='UbuntuMono Nerd Font Mono 20'
+  foreground-color='#D8DEE9'
+  highlight-background-color='rgb(136,192,208)'
+  highlight-colors-set=true
+  highlight-foreground-color='rgb(46,52,64)'
+  login-shell=false
+  nord-gnome-terminal-version='0.1.0'
+  palette=['#3B4252', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#88C0D0', '#E5E9F0', '#4C566A', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#8FBCBB', '#ECEFF4']
+  use-custom-command=true
+  use-system-font=false
+  use-theme-background=false
+  use-theme-colors=false
+  use-theme-transparency=false
+  use-transparent-background=true
+  visible-name='Nord'
+
+  [:8481259a-b760-4d77-a61e-9d0d255732ce/legacy/keybindings]
+  zoom-in='<Primary>equal'
+
+  [:8481259a-b760-4d77-a61e-9d0d255732ce/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+  audible-bell=false
+  background-color='rgb(0,43,54)'
+  background-transparency-percent=8
+  custom-command='/usr/bin/fish'
+  font='UbuntuMono Nerd Font Mono 19'
+  foreground-color='rgb(131,148,150)'
+  use-custom-command=true
+  use-system-font=false
+  use-theme-colors=false
+  use-theme-transparency=false
+  use-transparent-background=true
+
+  [:default/legacy/keybindings]
+  zoom-in='<Primary>equal'
+
+  [:default/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+  audible-bell=false
+  background-color='rgb(0,43,54)'
+  background-transparency-percent=8
+  custom-command='/usr/bin/fish'
+  font='UbuntuMono Nerd Font Mono 19'
+  foreground-color='rgb(131,148,150)'
+  use-custom-command=true
+  use-system-font=false
+  use-theme-colors=false
+  use-theme-transparency=false
+  use-transparent-background=true
+
+  [legacy/keybindings]
+  zoom-in='<Primary>equal'
+
+  [legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+  audible-bell=false
+  background-color='rgb(0,43,54)'
+  background-transparency-percent=8
+  custom-command='/usr/bin/fish'
+  font='UbuntuMono Nerd Font Mono 19'
+  foreground-color='rgb(131,148,150)'
+  use-custom-command=true
+  use-system-font=false
+  use-theme-colors=false
+  use-theme-transparency=false
+  use-transparent-background=true
+
+# Fonts
+nerd_fonts_version: "v3.1.0"
+fonts:
+  ubuntu_mono:
+    url: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_version }}/UbuntuMono.zip"
+    filename: "/tmp/UbuntuMono.zip"
+
+# rogauracore
+rogauracore_cmd: "rogauracore rainbow_cycle 1; rogauracore brightness 1"
+rogauracore_version: "1.6"
+
+# No-login users for owning services
+service_users:
+  folding:
+    name: "folding"
+    uid: "1007"
+    groups: "folding"
+    gid: "1007"
