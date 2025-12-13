@@ -154,12 +154,13 @@ dconf_entries:
     value: "'Pop-dark'"
 
   # Power settings
-  ac_sleep_setting:
+  power_idle_setting:
     key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
-    value: "'nothing'"
-  battery_sleep_setting:
-    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type"
-    value: "'nothing'"
+    value: "'suspend'"
+  # TODO this doesn't seem to work
+  #power_sleep_timeout:
+    #key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-timeout"
+    #value: "'3600'"
 
   # GNOME shell settings
   enable_user_extensions:
