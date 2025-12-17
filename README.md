@@ -37,7 +37,7 @@
 
 ## Running
 
-On first run, use `ansible-playbook -K --ask-vault-pass playbook.yml` to run the playbook. After passwordless-sudo is configured on the first run, you can omit the `-K`. Use the `--limit "<hostname>"` option to run the playbook on specific hosts, e.g. `ansible-playbook --ask-vault-pass --limit "JacksonBox,RaspberryPi" playbook.yml`.
+Use `ansible-playbook -K --ask-vault-pass playbook.yml` to run the playbook. Use the `--limit "<hostname>"` option to run the playbook on specific hosts, e.g. `ansible-playbook -K --ask-vault-pass --limit "JacksonBox,RaspberryPi" ./playbook.yml`.
 
 ## Notes
 
