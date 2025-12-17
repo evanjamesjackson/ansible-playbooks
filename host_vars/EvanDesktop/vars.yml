@@ -68,16 +68,6 @@ flatpaks:
 
 # Autostart
 autostart_configs:
-  protonvpn:
-    filename: "protonvpn.desktop"
-    script: |
-      #!/usr/bin/env xdg-open 
-      [Desktop Entry] 
-      Type=Application
-      Name=protonvpn
-      Exec=bash -c "protonvpn-app"
-      StartupNotify=false
-      Terminal=false
   filen:
     filename: "filen.desktop"
     script: |
