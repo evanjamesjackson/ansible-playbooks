@@ -4,9 +4,6 @@
 - name: Configure autostart applications
   ansible.builtin.include_tasks: autostart.yml
 
-- name: Configure GNOME
-  ansible.builtin.include_tasks: gnome.yml
-
 - name: Configure fonts
   ansible.builtin.include_tasks: fonts.yml
 
