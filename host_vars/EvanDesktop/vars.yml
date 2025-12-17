@@ -42,14 +42,6 @@ debs:
     url: "https://github.com/UnnoTed/wireguird/releases/download/v1.1.0/wireguird_amd64.deb"
     filename: "/tmp/wireguird.deb"
     package: "wireguird"
-  minecraft:
-    url: "https://launcher.mojang.com/download/Minecraft.deb"
-    filename: "/tmp/minecraft.deb"
-    package: "minecraft-launcher"
-  discord:
-    url: "https://discord.com/api/download?platform=linux&format=deb"
-    filename: "/tmp/discord.deb"
-    package: discord
   filen:
     url: "http://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_amd64.deb"
     filename: "/tmp/filen.deb"
