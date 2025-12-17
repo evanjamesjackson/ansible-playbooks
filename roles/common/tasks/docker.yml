@@ -1,10 +1,3 @@
-- name: Add Docker apt public key - seems to only be required for Ubuntu installations
-  become: true
-  ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 7EA0A9C3F273FCD8
-  when: ansible_distribution == "Ubuntu"
-
 - name: Run geerlingguy.pip role to install Docker pip package
   ansible.builtin.include_role:
     name: geerlingguy.pip
