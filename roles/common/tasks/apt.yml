@@ -20,13 +20,18 @@
   become: true
   vars:
     default_apt_packages:
+      - ca-certificates
+      - curl
       - fish
+      - gnupg
       - htop
+      - make
       - software-properties-common
       - speedtest-cli
       - stow
       - tmux
       - vim
+      - wget
     combined_apt_packages: "{{ default_apt_packages + apt_packages }}"
   ansible.builtin.package:
     state: present
