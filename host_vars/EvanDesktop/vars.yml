@@ -74,10 +74,6 @@ fonts:
     url: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_version }}/UbuntuMono.zip"
     filename: "/tmp/UbuntuMono.zip"
 
-# rogauracore
-rogauracore_cmd: "rogauracore rainbow_cycle 1; rogauracore brightness 1"
-rogauracore_version: "1.6"
-
 # No-login users for owning services
 service_users:
   folding:
