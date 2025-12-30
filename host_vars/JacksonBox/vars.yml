@@ -23,44 +23,44 @@ debs:
 service_users:
   calibre:
     name: "calibre"
-    uid: 1005
+    uid: "1005"
     groups: "calibre"
-    gid: 1005
+    gid: "1005"
   ddclient:
     name: "ddclient"
-    uid: 1006
+    uid: "1006"
     groups: "ddclient"
-    gid: 1006
+    gid: "1006"
   folding:
     name: "folding"
-    uid: 1007
+    uid: "1007"
     groups: "folding"
-    gid: 1007
+    gid: "1007"
   media:
     name: "media"
-    uid: 1008
+    uid: "1008"
     groups: "media"
-    gid: 1008
+    gid: "1008"
   minecraft:
     name: "minecraft"
-    uid: 1009
+    uid: "1009"
     groups: "minecraft"
-    gid: 1009
+    gid: "1009"
   netdata:
     name: "netdata"
-    uid: 1004
+    uid: "1004"
     groups: "netdata"
-    gid: 1004
+    gid: "1004"
   wireguard:
     name: "wireguard"
-    uid: 1003
+    uid: "1003"
     groups: "wireguard"
-    gid: 1003
+    gid: "1003"
   www-data:
     name: "www-data"
-    uid: 33
+    uid: "33"
     groups: "www-data"
-    gid: 33
+    gid: "33"
 
 # NGINX Docker network shared by services that should be forwarded to the reverse proxy
 nginx_network: "nginx_network"
