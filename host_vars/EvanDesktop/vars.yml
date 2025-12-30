@@ -66,6 +66,7 @@ autostart_configs:
       #!/usr/bin/env xdg-open 
       [Desktop Entry] 
       Type=Application
+      Exec="@filendesktop %U"
 
 # Fonts
 nerd_fonts_version: "v3.1.0"
