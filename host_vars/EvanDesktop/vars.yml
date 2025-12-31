@@ -57,6 +57,7 @@ flatpaks:
   - org.DolphinEmu.dolphin-emu
   - net.pcsx2.PCSX2
   - com.brave.Browser
+  - net.davidotek.pupgui2 # Proton-GE tool (https://davidotek.github.io/protonup-qt)
 
 # Autostart
 autostart_configs:
