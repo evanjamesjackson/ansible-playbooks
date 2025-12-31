@@ -1,6 +1,9 @@
 - name: Configure autostart applications
   ansible.builtin.include_tasks: autostart.yml
 
+- name: Configure USB wakeup
+  ansible.builtin.include_tasks: usb_wakeup.yml
+
 - name: Configure fonts
   ansible.builtin.include_tasks: fonts.yml
 

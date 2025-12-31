@@ -1,0 +1,40 @@
+- name: Install USB wakeup script
+  become: true
+  ansible.builtin.copy:
+    src: enable-usb-wakeup.sh
+    dest: /usr/local/bin/enable-usb-wakeup.sh
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Install systemd service for USB wakeup
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/usb-wakeup.service
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=Enable USB wakeup devices
+      After=multi-user.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/local/bin/enable-usb-wakeup.sh
+      RemainAfterExit=yes
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Reload systemd
+  become: true
+  ansible.builtin.command: systemctl daemon-reexec
+  changed_when: false
+
+- name: Enable and start usb-wakeup service
+  become: true
+  ansible.builtin.systemd:
+    name: usb-wakeup.service
+    enabled: yes
+    state: started
