@@ -1,0 +1,10 @@
+- name: Enable Bluetooth auto-power-on in BlueZ
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/bluetooth/main.conf
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [General]
+      AutoEnable=true
