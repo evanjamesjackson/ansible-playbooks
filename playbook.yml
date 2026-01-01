@@ -1,27 +1,39 @@
-- hosts: all
+- name: Common play for all hosts
+  hosts: all
   roles:
     - common
 
-- hosts: personal
+- name: Personal devices
+  hosts: personal
   roles:
     - personal
 
-- hosts: zephyrus
+- name: Devices running KDE
+  hosts: kde
+  roles:
+    - kde
+
+- name: Asus Zephyrus devices
+  hosts: zephyrus
   roles:
     - zephyrus
 
-- hosts: servers
+- name: Servers
+  hosts: servers
   roles:
     - server
 
-- hosts: web
+- name: Web servers
+  hosts: web
   roles:
     - web
 
-- hosts: pi_hole
+- name: Pi-holes
+  hosts: pi_hole
   roles:
     - pi_hole
 
-- hosts: folding
+- name: Devices running folding@home
+  hosts: folding
   roles:
     - folding@home
