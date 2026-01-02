@@ -1,0 +1,19 @@
+- name: Services shortcuts
+  ansible.builtin.blockinfile:
+    path: ~/.config/kglobalshortcutsrc
+    marker: "# {mark} ANSIBLE-MANAGED"
+    block: |
+      [services][io.gitlab.librewolf-community.desktop]
+      _launch=Ctrl+Alt+I
+
+      [services][tv.plex.PlexDesktop.desktop]
+      _launch=Ctrl+Alt+P
+
+# TODO there appears to be a checkbox in the GUI that needs to be checked ("Configure keyboard bindings") and there doesn't appear to be any way to check it programmatically
+- name: Map Caps Lock to Ctrl
+  community.general.ini_file:
+    path: "~/.config/kxkbrc"
+    section: Layout
+    option: Options
+    value: "caps:ctrl_modifier"
+    mode: 0644

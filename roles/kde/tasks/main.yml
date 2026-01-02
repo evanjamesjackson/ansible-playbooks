@@ -1,4 +1,6 @@
 # TODO power settings
-# TODO keyboard shortcuts
 # TODO dark mode
 # TODO taskbar pins/settings
+
+- name: Keyboard configuration
+  ansible.builtin.include_tasks: keyboard.yml
