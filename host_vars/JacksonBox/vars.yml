@@ -12,7 +12,6 @@ user_shell: "/usr/bin/fish"
 dotfiles_branch: server
 
 # .deb packages
-# .deb's
 debs:
   filen:
     url: "http://cdn.filen.io/@filen/desktop/release/latest/Filen_linux_amd64.deb"

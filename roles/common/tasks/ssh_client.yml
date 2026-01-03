@@ -12,19 +12,11 @@
     group: "{{ username }}"
     mode: 0644
 
-- name: Generate main SSH key, if one is defined
-  community.crypto.openssh_keypair:
-    path: "{{ ssh_key_file }}"
-    type: ed25519
-  when: ssh_key_file is defined
-
 - name: Add references to config file
   community.general.ssh_config:
     user: "{{ username }}"
-    host: "{{ item.value.host }}"
-    hostname: "{{ item.value.hostname }}"
-    identity_file: "{{ item.value.identity_file if 'identity_file' in item.value else ssh_key_file }}"
-    add_keys_to_agent: true
+    host: "{{ item }}"
+    hostname: "{{ hostvars[item].ansible_host }}"
     state: present
-  loop: "{{ ssh_config_hosts | dict2items }}"
-  when: ssh_config_hosts is defined
+  with_items: "{{ groups.all }}"
+  when: hostvars[item].ansible_host is defined
