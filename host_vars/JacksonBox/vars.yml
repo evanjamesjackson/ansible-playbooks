@@ -98,14 +98,14 @@ wireguard_port: "51820"
 wireguard_webui_port: "51821"
 
 # Minecraft
-minecraft_servers:
-  minecraft1:
-    version: "1.21.4"
-    directory: "{{ home_directory }}/minecraft/minecraft1"
-    java_port: 25565
-    bedrock_port: 19132
-    java_options: "-Xms256M -Xmx6G -XX:+UseG1GC"
-    custom_plugin_urls: "https://dev.bukkit.org/projects/thizzyz-tree-feller/files/latest,https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsX-2.20.1.jar,https://github.com/MC-Machinations/PaperTweaks/releases/download/v0.5.0/PaperTweaks.jar"
+#minecraft_servers:
+  #minecraft1:
+    #version: "1.21.4"
+    #directory: "{{ home_directory }}/minecraft/minecraft1"
+    #java_port: 25565
+    #bedrock_port: 19132
+    #java_options: "-Xms256M -Xmx6G -XX:+UseG1GC"
+    #custom_plugin_urls: "https://dev.bukkit.org/projects/thizzyz-tree-feller/files/latest,https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsX-2.20.1.jar,https://github.com/MC-Machinations/PaperTweaks/releases/download/v0.5.0/PaperTweaks.jar"
 
 # Backups
 backups_repo_dest: "{{ home_directory }}/backups"
