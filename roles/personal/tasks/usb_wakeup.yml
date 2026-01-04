@@ -1,3 +1,5 @@
+# Note - this enables USB wakeup at the OS level, but your motherboard will likely need to have a setting like "Wake from USB" enabled as well
+
 - name: Install USB wakeup script
   become: true
   ansible.builtin.copy:
