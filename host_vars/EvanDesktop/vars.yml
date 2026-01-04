@@ -52,12 +52,17 @@ flatpaks:
 # Autostart
 autostart_configs:
   filen:
-    filename: "filen.desktop"
+    filename: "@filendesktop.desktop"
     script: |
-      #!/usr/bin/env xdg-open 
-      [Desktop Entry] 
+      [Desktop Entry]
+      Categories=Utility;
+      Comment=Filen Desktop Client
+      Exec="/opt/Filen/@filendesktop" %U
+      Icon=@filendesktop
+      Name=Filen
+      StartupWMClass=Filen
+      Terminal=false
       Type=Application
-      Exec="@filendesktop %U"
 
 # Fonts
 nerd_fonts_version: "v3.1.0"
