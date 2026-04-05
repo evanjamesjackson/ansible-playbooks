@@ -4,7 +4,6 @@
 2. Inspect `hosts.yml` and the `vars.yml` files to ensure they match your current setup
 3. Run `./install.sh` to install Ansible and its requirements
 4. Create `secret.yml` files under the `group_vars` and `host_vars` subdirectories:
-
    1. In `group_vars/all/secret.yml` add the following:
 
       ```
@@ -19,13 +18,7 @@
       plex_claim: Plex claim code (https://account.plex.tv/claim)
       ```
 
-   3. In `host_vars/EvanAsus/secret.yml` add the following:
-
-      ```
-      password: YOUR-USERS-PASSWORD-HERE
-      ```
-
-   4. In `host_vars/RaspberryPi/secret.yml` add the following:
+   3. In `host_vars/RaspberryPi/secret.yml` add the following:
 
       ```
       password: YOUR-USERS-PASSWORD-HERE
