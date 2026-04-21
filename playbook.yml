@@ -1,7 +1,7 @@
-- name: Common play for all hosts
-  hosts: all
+- name: Ubuntu devices
+  hosts: ubuntu
   roles:
-    - common
+    - ubuntu
 
 - name: Personal devices
   hosts: personal

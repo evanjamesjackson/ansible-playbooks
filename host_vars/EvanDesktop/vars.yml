@@ -9,7 +9,6 @@ apt_packages:
   - libreoffice
   - pavucontrol
   - qbittorrent
-  - retroarch
   - rpi-imager
   - solaar
   - steam
@@ -44,6 +43,7 @@ flatpaks:
   - tv.plex.PlexDesktop
   - com.spotify.Client
   - com.github.tchx84.Flatseal
+  - org.libretro.RetroArch
   - org.DolphinEmu.dolphin-emu
   - net.pcsx2.PCSX2
   - com.brave.Browser
@@ -61,6 +61,18 @@ autostart_configs:
       Icon=@filendesktop
       Name=Filen
       StartupWMClass=Filen
+      Terminal=false
+      Type=Application
+  wireguird:
+    filename: "@wireguird.desktop"
+    script: |
+      [Desktop Entry]
+      Categories=Utility;
+      Comment=Wireguird
+      Exec="/usr/local/bin/wireguird" %U
+      Icon=@wireguird
+      Name=Wireguird
+      StartupWMClass=Wireguird
       Terminal=false
       Type=Application
 
