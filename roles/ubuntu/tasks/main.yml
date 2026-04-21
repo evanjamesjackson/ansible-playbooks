@@ -1,9 +1,8 @@
-
 - name: Add IP addresses of all hosts to all hosts
   become: true
   ansible.builtin.lineinfile:
     dest: /etc/hosts
-    regexp: '.*{{ item }}$'
+    regexp: ".*{{ item }}$"
     line: "{{ hostvars[item].ansible_host }} {{item}}.local"
     state: present
   when: hostvars[item].ansible_host is defined
@@ -47,9 +46,6 @@
   ansible.builtin.include_tasks: debs.yml
   loop: "{{ debs | dict2items }}"
   when: debs is defined
-
-- name: Configure Flatpak
-  ansible.builtin.include_tasks: flatpak.yml
 
 - name: Configure Docker
   ansible.builtin.include_tasks: docker.yml

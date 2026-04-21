@@ -8,6 +8,11 @@
   roles:
     - personal
 
+- name: Devices that use Flatpaks
+  hosts: flatpak
+  roles:
+    - flatpak
+
 - name: Devices running KDE
   hosts: kde
   roles:
