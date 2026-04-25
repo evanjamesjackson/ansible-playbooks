@@ -1,57 +1,12 @@
-- name: Add IP addresses of all hosts to all hosts
-  become: true
-  ansible.builtin.lineinfile:
-    dest: /etc/hosts
-    regexp: ".*{{ item }}$"
-    line: "{{ hostvars[item].ansible_host }} {{item}}.local"
-    state: present
-  when: hostvars[item].ansible_host is defined
-  with_items: "{{ groups.all }}"
-
-- name: Set hostname
-  become: true
-  ansible.builtin.hostname:
-    name: "{{ hostname }}"
-
-- name: Set timezone
-  become: true
-  community.general.timezone:
-    name: "{{ timezone }}"
-
 - name: Run package-related tasks
   ansible.builtin.include_tasks: apt.yml
 
 # TODO unattended upgrades
 
-- name: Configure Python
-  ansible.builtin.include_tasks: python.yml
-
-- name: Run user-related tasks
-  ansible.builtin.include_tasks: user.yml
-
-- name: Configure SSH client settings
-  ansible.builtin.include_tasks: ssh_client.yml
-
-- name: Configure GitHub access settings
-  ansible.builtin.include_tasks: github.yml
-
-- name: Configure dotfiles
-  ansible.builtin.include_tasks: dotfiles.yml
-
-- name: Configure fish shell
-  ansible.builtin.include_tasks: fish.yml
-  when: "user_shell == '/usr/bin/fish'"
-
 - name: Install .debs not available in APT
   ansible.builtin.include_tasks: debs.yml
   loop: "{{ debs | dict2items }}"
   when: debs is defined
-
-- name: Configure Docker
-  ansible.builtin.include_tasks: docker.yml
-
-- name: Configure users for running services
-  ansible.builtin.include_tasks: service_users.yml
 
 - name: Reboot if required
   when: trigger_reboots is defined and trigger_reboots

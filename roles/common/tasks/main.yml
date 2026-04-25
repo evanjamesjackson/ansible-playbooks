@@ -1,0 +1,22 @@
+- name: Add IP addresses of all hosts to all hosts
+  become: true
+  ansible.builtin.lineinfile:
+    dest: /etc/hosts
+    regexp: ".*{{ item }}$"
+    line: "{{ hostvars[item].ansible_host }} {{item}}.local"
+    state: present
+  when: hostvars[item].ansible_host is defined
+  with_items: "{{ groups.all }}"
+
+- name: Set hostname
+  become: true
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+
+- name: Set timezone
+  become: true
+  community.general.timezone:
+    name: "{{ timezone }}"
+
+- name: Configure Python
+  ansible.builtin.include_tasks: python.yml

@@ -1,0 +1,21 @@
+- name: Run user-related tasks
+  ansible.builtin.include_tasks: user.yml
+
+- name: Configure SSH client settings
+  ansible.builtin.include_tasks: ssh_client.yml
+
+- name: Configure GitHub access settings
+  ansible.builtin.include_tasks: github.yml
+
+- name: Configure dotfiles
+  ansible.builtin.include_tasks: dotfiles.yml
+
+- name: Configure fish shell
+  ansible.builtin.include_tasks: fish.yml
+  when: "user_shell == '/usr/bin/fish'"
+
+- name: Configure Docker
+  ansible.builtin.include_tasks: docker.yml
+
+- name: Configure users for running services
+  ansible.builtin.include_tasks: service_users.yml

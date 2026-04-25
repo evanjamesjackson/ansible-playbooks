@@ -1,0 +1,13 @@
+username: deck
+home_directory: "/home/deck"
+
+# Flatpaks
+flatpaks:
+  - tv.plex.PlexDesktop
+  - com.spotify.Client
+  - com.github.tchx84.Flatseal
+  - org.libretro.RetroArch
+  - org.DolphinEmu.dolphin-emu
+  - net.pcsx2.PCSX2
+  - com.brave.Browser
+  - net.davidotek.pupgui2 # Proton-GE tool (https://davidotek.github.io/protonup-qt)

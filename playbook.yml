@@ -1,27 +1,25 @@
-- name: Ubuntu devices
+- name: Common role
+  hosts: all
+
+- name: Devices running Ubuntu
   hosts: ubuntu
   roles:
     - ubuntu
-
-- name: Personal devices
-  hosts: personal
-  roles:
-    - personal
 
 - name: Devices that use Flatpaks
   hosts: flatpak
   roles:
     - flatpak
 
-- name: Devices running KDE
-  hosts: kde
+- name: Development devices
+  hosts: development
   roles:
-    - kde
+    - development
 
-- name: Asus Zephyrus devices
-  hosts: zephyrus
+- name: Desktop devices
+  hosts: desktops
   roles:
-    - zephyrus
+    - desktop
 
 - name: Servers
   hosts: servers
@@ -29,16 +27,21 @@
     - server
 
 - name: Web servers
-  hosts: web
+  hosts: web_servers
   roles:
-    - web
+    - web_server
 
-- name: Pi-holes
-  hosts: pi_hole
+# - name: Pi-holes
+#   hosts: pi_hole
+#   roles:
+#     - pi_hole
+
+- name: Steam Decks
+  hosts: steam_decks
   roles:
-    - pi_hole
+    - steam_deck
 
-- name: Devices running folding@home
+- name: Devices running Folding@home
   hosts: folding
   roles:
     - folding@home
