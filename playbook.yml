@@ -1,5 +1,7 @@
-- name: Common role
+- name: All devices
   hosts: all
+  roles:
+    - common
 
 - name: Devices running Ubuntu
   hosts: ubuntu
