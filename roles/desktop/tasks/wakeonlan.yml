@@ -1,0 +1,7 @@
+# Note: remember to enable WakeOnLAN in your BIOS first! On MSI motherboards it's "Resume by PCI-E/Networking Device" under "Wake Up Event Setup"
+- name: Create cron job to enable WakeOnLAN
+  become: true
+  ansible.builtin.cron:
+    name: "Enable WakeOnLAN"
+    special_time: reboot
+    job: "ethtool -s {{ ansible_default_ipv4.interface }} wol g"

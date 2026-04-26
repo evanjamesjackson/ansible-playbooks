@@ -19,3 +19,6 @@
 
 - name: Keyboard configuration
   ansible.builtin.include_tasks: keyboard.yml
+
+- name: Configure WakeOnLAN
+  ansible.builtin.include_tasks: wakeonlan.yml
