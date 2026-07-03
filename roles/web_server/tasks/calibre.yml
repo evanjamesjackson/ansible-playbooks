@@ -7,35 +7,17 @@
         name: "{{ calibre_network }}"
         internal: false
 
-    - name: Pull and run Calibre container
+    - name: Pull and run Calibre Web Automated container
       community.docker.docker_container:
-        name: calibre
+        name: calibre-web-automated
         pull: always
-        image: lscr.io/linuxserver/calibre:latest
+        image: crocodilestick/calibre-web-automated:latest
         restart_policy: unless-stopped
         env:
           PUID: "{{ service_users.calibre.uid }}"
           PGID: "{{ service_users.calibre.gid }}"
           TZ: "{{ timezone }}"
-        ports:
-          - "{{ calibre_http_port }}:8080/tcp"
-          - "{{ calibre_https_port }}:8181/tcp"
-        volumes:
-          - calibre_config:/config
-          - "{{ calibre_library_dir }}:/library"
-        networks:
-          - name: "{{ calibre_network }}"
-
-    - name: Pull and run Calibre Web container
-      community.docker.docker_container:
-        name: calibre-web
-        pull: always
-        image: lscr.io/linuxserver/calibre-web:latest
-        restart_policy: unless-stopped
-        env:
-          PUID: "{{ service_users.calibre.uid }}"
-          PGID: "{{ service_users.calibre.gid }}"
-          TZ: "{{ timezone }}"
+          HARDCOVER_TOKEN: "{{ hardcover_api_token }}"
           # The following variables allow this container to work with nginx-proxy and acme-companion
           VIRTUAL_HOST: "{{ calibre_web_domain_name }}"
           LETSENCRYPT_HOST: "{{ calibre_web_domain_name }}"
@@ -44,30 +26,10 @@
           - "{{ calibre_web_port }}:8083/tcp"
         volumes:
           - calibre_web_config:/config
-          - "{{ calibre_library_dir }}:/library"
+          - "{{ calibre_library_dir }}:/calibre-library"
         networks:
           - name: "{{ calibre_network }}"
           - name: "{{ nginx_network }}"
-
-    - name: Open Calibre HTTP port in UFW
-      become: true
-      community.general.ufw:
-        port: "{{ calibre_http_port }}"
-        proto: tcp
-        rule: allow
-        direction: in
-        src: "{{ item }}"
-      loop: "{{ local_subnets }}"
-
-    - name: Open Calibre HTTPs port in UFW
-      become: true
-      community.general.ufw:
-        port: "{{ calibre_https_port }}"
-        proto: tcp
-        rule: allow
-        direction: in
-        src: "{{ item }}"
-      loop: "{{ local_subnets }}"
 
     - name: Open Calibre web port in UFW
       become: true
