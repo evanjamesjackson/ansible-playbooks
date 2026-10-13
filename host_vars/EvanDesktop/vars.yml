@@ -48,6 +48,7 @@ flatpaks:
   - net.pcsx2.PCSX2
   - com.brave.Browser
   - net.davidotek.pupgui2 # Proton-GE tool (https://davidotek.github.io/protonup-qt)
+  - dev.lizardbyte.app.Sunshine
 
 # Autostart
 autostart_configs:
@@ -73,6 +74,17 @@ autostart_configs:
       Icon=@wireguird
       Name=Wireguird
       StartupWMClass=Wireguird
+      Terminal=false
+      Type=Application
+  sunshine:
+    filename: "dev.lizardbyte.app.Sunshine.desktop"
+    script: |
+      [Desktop Entry]
+      Categories=Utility;
+      Comment=Sunshine game stream host
+      Exec=/usr/bin/flatpak run dev.lizardbyte.app.Sunshine
+      Icon=dev.lizardbyte.app.Sunshine
+      Name=Sunshine
       Terminal=false
       Type=Application
 
