@@ -88,6 +88,28 @@ autostart_configs:
       Terminal=false
       Type=Application
 
+# Sunshine config
+sunshine_display_output: HDMI-A-1
+sunshine_default_mode: "3840x2160@60"
+sunshine_steam_deck_mode: "1280x800@60"
+sunshine_apps:
+  - name: Desktop
+    image-path: desktop.png
+  - name: Steam
+    image-path: steam.png
+    output: ""
+    cmd: ""
+    detached:
+      - "flatpak-spawn --host /usr/games/steam steam://open/bigpicture"
+    prep-cmd:
+      - do: "flatpak-spawn --host kscreen-doctor output.{{ sunshine_display_output }}.mode.{{ sunshine_steam_deck_mode }}"
+        undo: "flatpak-spawn --host kscreen-doctor output.{{ sunshine_display_output }}.mode.{{ sunshine_default_mode }}"
+    exclude-global-prep-cmd: false
+    elevated: false
+    auto-detach: true
+    wait-all: true
+    exit-timeout: 5
+
 # Fonts
 nerd_fonts_version: "v3.1.0"
 fonts:

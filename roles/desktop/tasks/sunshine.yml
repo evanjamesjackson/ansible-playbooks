@@ -1,0 +1,11 @@
+- name: Ensure Sunshine config directory exists
+  ansible.builtin.file:
+    path: "{{ home_directory }}/.var/app/dev.lizardbyte.app.Sunshine/config/sunshine"
+    state: directory
+    mode: "0755"
+
+- name: Deploy Sunshine applications
+  ansible.builtin.copy:
+    dest: "{{ home_directory }}/.var/app/dev.lizardbyte.app.Sunshine/config/sunshine/apps.json"
+    mode: "0644"
+    content: "{{ {'env': {'PATH': '$(PATH):$(HOME)/.local/bin'}, 'apps': sunshine_apps} | to_nice_json(indent=4) }}"

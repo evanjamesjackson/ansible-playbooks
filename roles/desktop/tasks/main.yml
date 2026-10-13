@@ -22,3 +22,7 @@
 
 - name: Configure WakeOnLAN
   ansible.builtin.include_tasks: wakeonlan.yml
+
+- name: Configure Sunshine
+  ansible.builtin.include_tasks: sunshine.yml
+  when: sunshine_apps is defined
