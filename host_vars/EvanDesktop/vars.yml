@@ -9,7 +9,6 @@ apt_packages:
   - libreoffice
   - pavucontrol
   - qbittorrent
-  - rpi-imager
   - solaar
   - steam
   - vlc
