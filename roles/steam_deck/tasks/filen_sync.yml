@@ -24,7 +24,7 @@
 
 - name: Ensure Cloud/Games directory exists
   ansible.builtin.file:
-    path: "{{ home_directory }}/.config/filen-cli"
+    path: "{{ home_directory }}/Cloud/Games"
     state: directory
     mode: "0755"
 
