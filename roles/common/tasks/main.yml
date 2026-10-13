@@ -1,3 +1,15 @@
+- name: Reboot if required
+  when: trigger_reboots is defined and trigger_reboots
+  block:
+    - name: Check for presence of reboot-required file
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: reboot_required_file
+    - name: Reboot if required
+      become: true
+      when: reboot_required_file.stat.exists
+      ansible.builtin.reboot:
+
 - name: Add IP addresses of all hosts to all hosts
   become: true
   ansible.builtin.lineinfile:
