@@ -1,12 +1,5 @@
-- name: Install packages via pacman
-  become: true
-  community.general.pacman:
-    name:
-      - curl
-      - flatpak
-      - vim
-      - stow
-    state: present
+# SteamOS has a read-only root filesystem that is reset on updates, so packages
+# can't be installed via pacman. curl, flatpak and vim ship with SteamOS.
 
 - name: Ensure vi alias points to vim
   ansible.builtin.lineinfile:
