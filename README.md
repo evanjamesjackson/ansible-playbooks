@@ -13,15 +13,9 @@
    1. In `host_vars/JacksonBox/secret.yml` add the following:
 
       ```
-      password: YOUR-USERS-PASSWORD-HERE
       dynamic_dns_password: DYNAMIC-DNS-SERVICE-PASSWORD-HERE
       plex_claim: Plex claim code (https://account.plex.tv/claim)
-      ```
-
-   1. In `host_vars/RaspberryPi/secret.yml` add the following:
-
-      ```
-      password: YOUR-USERS-PASSWORD-HERE
+      hardcover_api_token: Hardcover API token (https://hardcover.app/account/api)
       ```
 
 1. Get a Wireguard configuration file from your VPN provider and place it at `roles/web/files/wg0.conf`.
