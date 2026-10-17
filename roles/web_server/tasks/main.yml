@@ -18,5 +18,8 @@
 - name: Configure Calibre service
   ansible.builtin.include_tasks: calibre.yml
 
+- name: Configure Pi-hole service
+  ansible.builtin.include_tasks: pi_hole.yml
+
 - name: Configure backups
   ansible.builtin.include_tasks: backups.yml

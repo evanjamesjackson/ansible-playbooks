@@ -1,45 +1,33 @@
 - name: Pull Pi-hole Docker image
   community.docker.docker_image_pull:
-    name: cbcrowe/pihole-unbound
-
-- name: Get local IP
-  ansible.builtin.shell:
-    cmd: |
-      set -o pipefail
-      hostname -I | awk '{print $1}'
-    executable: /bin/bash
-  register: local_ip
-  changed_when: local_ip.changed
+    name: mpgirro/pihole-unbound
 
 - name: Start Pi-hole Docker container
   community.docker.docker_container:
     name: pi-hole
     image: mpgirro/pihole-unbound
     restart_policy: unless-stopped
-    hostname: "{{ hostname }}"
-    domainname: "{{ hostname }}.local"
-    network_mode: host
-    capabilities:
-      - NET_ADMIN
+    ports:
+      - "{{ pi_hole_web_port }}:{{ pi_hole_web_port }}/tcp"
+      # Bind DNS to the LAN IP only so it doesn't conflict with the host's local resolver
+      - "{{ ansible_default_ipv4.address }}:53:53/tcp"
+      - "{{ ansible_default_ipv4.address }}:53:53/udp"
     env:
-      FTLCONF_LOCAL_IPV4: "{{ local_ip.stdout }}"
       TZ: "{{ timezone }}"
       # Web admin
-      WEBPASSWORD: "pihole"
-      # DNS
-      PIHOLE_DNS_: "127.0.0.1#5335"
-      DNSSEC: "true"
-      DNSMASQ_LISTENING: "all"
+      FTLCONF_webserver_api_password: "pihole"
+      FTLCONF_webserver_port: "{{ pi_hole_web_port }}"
+      # LAN clients arrive from outside the Docker bridge network, so default "LOCAL" mode would ignore them
+      FTLCONF_dns_listeningMode: "ALL"
     volumes:
-      - etc_pihole-unbound:/etc/pihole:rw
-      - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
+      - pihole-config:/etc/pihole
 
 - name: Open Pi-hole web UI port in UFW
   become: true
   community.general.ufw:
     rule: allow
     direction: in
-    port: "80"
+    port: "{{ pi_hole_web_port }}"
     proto: tcp
     src: "{{ item }}"
   loop: "{{ local_subnets }}"

@@ -3,10 +3,10 @@
   roles:
     - common
 
-- name: Devices running Ubuntu
-  hosts: ubuntu
+- name: Devices running Debian-based OS's
+  hosts: debian
   roles:
-    - ubuntu
+    - debian
 
 - name: Devices that use Flatpaks
   hosts: flatpak
