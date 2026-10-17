@@ -63,18 +63,6 @@ autostart_configs:
       StartupWMClass=Filen
       Terminal=false
       Type=Application
-  wireguird:
-    filename: "@wireguird.desktop"
-    script: |
-      [Desktop Entry]
-      Categories=Utility;
-      Comment=Wireguird
-      Exec="/usr/local/bin/wireguird" %U
-      Icon=@wireguird
-      Name=Wireguird
-      StartupWMClass=Wireguird
-      Terminal=false
-      Type=Application
   sunshine:
     filename: "dev.lizardbyte.app.Sunshine.desktop"
     script: |
